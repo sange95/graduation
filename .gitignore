@@ -105,4 +105,4 @@ venv.bak/
 
 .idea/
 informations/logs/
-.migrations/
+migrations/
