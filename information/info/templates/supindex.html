@@ -1,0 +1,349 @@
+{% extends "supbase.html" %}
+{% block titleBlock %}
+72Bian/首页
+{% endblock %}
+{% block scriptBlock %}
+<script type="text/javascript" src="../static/js/lunbotu.js"></script>
+<link rel="stylesheet" type="text/css" href="../static/css/lunbotu.css">
+<link rel="stylesheet" type="text/css" href="../static/css/supindex.css">
+{% endblock %}
+{% block cssBlock %}
+<style>
+    .item {
+        display: -webkit-inline-box;
+        width: 240px;
+        height: 200px;
+        border: 1px solid gray;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .lanmu {
+        padding-left: 17%;
+        padding-right: 17%;
+    }
+
+    .point {
+        width: 10px;
+        height: 10px;
+        background-color: aqua;
+        border-radius: 50% 50% 50% 50%;
+        display: inline-block;
+    }
+</style>
+{% endblock %}
+
+{% block contentBlock %}
+<div class="container-fluid">
+    <div id="recycle">
+        <div id="recycletitle">
+            &nbsp;&nbsp;<a>高效回收</a>
+        </div>
+        <div class="recyclediv">
+            <div class="recycleimg">
+                <img src="../static/news/images/cat.jpg" alt="">
+            </div>
+            <div class="recycletext">
+                <div>
+                    <h6>瓶罐类:</h6>
+                    <a>饮料瓶</a>
+                    <a>啤酒瓶</a>
+                    <a>牛奶瓶</a>
+                </div>
+                <span>￥0.01元</span>
+            </div>
+        </div>
+        <div class="recyclediv">
+            <div class="recycleimg">
+                <img src="../static/news/images/cat.jpg" alt="">
+            </div>
+            <div class="recycletext">
+                <div>
+                    <h6>瓶罐类:</h6>
+                    <a>饮料瓶</a>
+                    <a>啤酒瓶</a>
+                    <a>牛奶瓶</a>
+                </div>
+                <span>￥0.01元</span>
+            </div>
+        </div>
+        <div class="recyclediv">
+            <div class="recycleimg">
+                <img src="../static/news/images/cat.jpg" alt="">
+            </div>
+            <div class="recycletext">
+                <div>
+                    <h6>瓶罐类:</h6>
+                    <a>饮料瓶</a>
+                    <a>啤酒瓶</a>
+                    <a>牛奶瓶</a>
+                </div>
+                <span>￥0.01元</span>
+            </div>
+        </div>
+        <div class="recyclediv">
+            <div class="recycleimg">
+                <img src="../static/news/images/cat.jpg" alt="">
+            </div>
+            <div class="recycletext">
+                <div>
+                    <h6>瓶罐类:</h6>
+                    <a>饮料瓶</a>
+                    <a>啤酒瓶</a>
+                    <a>牛奶瓶</a>
+                </div>
+                <span>￥0.01元</span>
+            </div>
+        </div>
+    </div>
+    <div id="halfright">
+        <!-- 轮播图div -->
+        <div id="lun">
+            <!-- 轮播大图 -->
+            <ul>
+                <li class="active"><a href=""><img class="lunimg" src="../static/imgs/1.jpg" alt=""></a></li>
+                <li><a href=""><img class="lunimg" src="../static/imgs/2.jpg" alt=""></a></li>
+                <li><a href=""><img class="lunimg" src="../static/imgs/3.jpg" alt=""></a></li>
+                <li><a href=""><img class="lunimg" src="../static/imgs/4.jpg" alt=""></a></li>
+                <li><a href=""><img class="lunimg" src="../static/imgs/5.jpg" alt=""></a></li>
+                <li><a href=""><img class="lunimg" src="../static/imgs/6.jpg" alt=""></a></li>
+                <li><a href=""><img class="lunimg" src="../static/imgs/7.jpg" alt=""></a></li>
+                <li><a href=""><img class="lunimg" src="../static/imgs/8.jpg" alt=""></a></li>
+            </ul>
+            <!-- 轮播图圆点 -->
+            <div id="list-circle">
+                <ul>
+                    <li class="list-active"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <!-- 轮播图左右箭头 -->
+            <div id="left"></div>
+            <div id="right"></div>
+        </div>
+        <div id="question">
+            <div id="questiontitle">
+                &nbsp;&nbsp;<a>热门问答</a>
+            </div>
+            <div id="questionlist">
+                <ul>
+                    <li></li><a>你还留恋你初中时候模样吗？</a>
+                </ul>
+                <ul>
+                    <li></li><a>你还留恋你初中时候模样吗？</a>
+                </ul>
+                <ul>
+                    <li></li><a>大三了是实习还是考研呢？</a>
+                </ul>
+                <ul>
+                    <li></li><a>你还留恋你初中时候模样吗？</a>
+                </ul>
+                <ul>
+                    <li></li><a>你还留恋你初中时候模样吗？</a>
+                </ul>
+                <ul>
+                    <li></li><a>大三了是实习还是考研呢？</a>
+                </ul>
+                <ul>
+                    <li></li><a>你还留恋你初中时候模样吗？</a>
+                </ul>
+                <ul>
+                    <li></li><a>你还留恋你初中时候模样吗？</a>
+                </ul>
+                <ul>
+                    <li></li><a>大三了是实习还是考研呢？</a>
+                </ul>
+                <ul>
+                    <li></li><a>你还留恋你初中时候模样吗？</a>
+                </ul>
+            </div>
+        </div>
+        <div id="news">
+            <div id="hntitle">
+                <a>大事件一览无遗</a>
+            </div>
+            <div id="newslist">
+                <ul>
+                    <div class="newimgdiv">
+                        <img src="../static/imgs/new1.jpg" alt="">
+                    </div>
+                    <div class="newtitle">
+                        <div class="title"><a>国家针对五一小长假进行调整</a></div>
+                        <div class="newitem">
+                            <a class="clasfiy">国际</a><a>中国日报-</a><a>阅读量:555</a>
+                        </div>
+                    </div>
+                </ul>
+                <ul>
+                    <div class="newimgdiv">
+                        <img src="../static/imgs/new1.jpg" alt="">
+                    </div>
+                    <div class="newtitle">
+                        <div class="title"><a>江苏临城发生化学爆炸</a></div>
+                        <div class="newitem">
+                            <a class="clasfiy">国际</a><a>中国日报-</a><a>阅读量:555</a>
+                        </div>
+                    </div>
+                </ul>
+                <ul>
+                    <div class="newimgdiv">
+                        <img src="../static/imgs/new2.jpg" alt="">
+                    </div>
+                    <div class="newtitle">
+                        <div class="title"><a>国家针对五一小长假进行调整</a></div>
+                        <div class="newitem">
+                            <a class="clasfiy">国际</a><a>中国日报-</a><a>阅读量:555</a>
+                        </div>
+                    </div>
+                </ul>
+                <ul>
+                    <div class="newimgdiv">
+                        <img src="../static/imgs/new1.jpg" alt="">
+                    </div>
+                    <div class="newtitle">
+                        <div class="title"><a>江苏临城发生化学爆炸</a></div>
+                        <div class="newitem">
+                            <a class="clasfiy">国际</a><a>中国日报-</a><a>阅读量:555</a>
+                        </div>
+                    </div>
+                </ul>
+                <ul>
+                    <div class="newimgdiv">
+                        <img src="../static/imgs/new2.jpg" alt="">
+                    </div>
+                    <div class="newtitle">
+                        <div class="title"><a>江苏临城发生化学爆炸</a></div>
+                        <div class="newitem">
+                            <a class="clasfiy">国际</a><a>中国日报-</a><a>阅读量:555</a>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div id="home">
+            <div id="hntitle">
+                <a>拎包入住的房子都在这里</a>
+            </div>
+            <div id="newslist">
+                <ul>
+                    <div class="newimgdiv">
+                        <img src="../static/imgs/house.jpg" alt="">
+                    </div>
+                    <div class="housetitle">
+                        <a href="">保利心语</a>
+                        <br>
+                        <a class="smallfont">中原区</a>
+                    </div>
+                    <div class="classfiy">
+                        <a>一室一厅</a>
+                        <br>
+                        <a class="smallfont">楼层：</a><a class="smallfont">3/6</a>
+                    </div>
+                    <div class="area">
+                        <span class="red">22</span><a>㎡</a>
+                    </div>
+
+                    <div class="price">
+                        <span class="red">800</span><a class="smallfont">元/月</a>
+                    </div>
+                </ul>
+                <ul>
+                    <div class="newimgdiv">
+                        <img src="../static/imgs/house2.jpg" alt="">
+                    </div>
+                    <div class="housetitle">
+                        <a href="">幸福六合门</a>
+                        <br>
+                        <a class="smallfont">中原区</a>
+                    </div>
+                    <div class="classfiy">
+                        <a>一室一厅</a>
+                        <br>
+                        <a class="smallfont">楼层：</a><a class="smallfont">12/18</a>
+                    </div>
+                    <div class="area">
+                        <span class="red">22</span><a>㎡</a>
+                    </div>
+
+                    <div class="price">
+                        <span class="red">800</span><a class="smallfont">元/月</a>
+                    </div>
+                </ul>
+                <ul>
+                    <div class="newimgdiv">
+                        <img src="../static/imgs/house.jpg" alt="">
+                    </div>
+                    <div class="housetitle">
+                        <a href="">保利心语</a>
+                        <br>
+                        <a class="smallfont">中原区</a>
+                    </div>
+                    <div class="classfiy">
+                        <a>一室一厅</a>
+                        <br>
+                        <a class="smallfont">楼层：</a><a class="smallfont">3/6</a>
+                    </div>
+                    <div class="area">
+                        <span class="red">22</span><a>㎡</a>
+                    </div>
+
+                    <div class="price">
+                        <span class="red">800</span><a class="smallfont">元/月</a>
+                    </div>
+                </ul>
+                <ul>
+                    <div class="newimgdiv">
+                        <img src="../static/imgs/house2.jpg" alt="">
+                    </div>
+                    <div class="housetitle">
+                        <a href="">保利百合</a>
+                        <br>
+                        <a class="smallfont">中原区</a>
+                    </div>
+                    <div class="classfiy">
+                        <a>一厅</a>
+                        <br>
+                        <a class="smallfont">楼层：</a><a class="smallfont">3/6</a>
+                    </div>
+                    <div class="area">
+                        <span class="red">50</span><a>㎡</a>
+                    </div>
+
+                    <div class="price">
+                        <span class="red">1000</span><a class="smallfont">元/月</a>
+                    </div>
+                </ul>
+                <ul>
+                    <div class="newimgdiv">
+                        <img src="../static/imgs/house.jpg" alt="">
+                    </div>
+                    <div class="housetitle">
+                        <a href="">湖光苑</a>
+                        <br>
+                        <a class="smallfont">金水区</a>
+                    </div>
+                    <div class="classfiy">
+                        <a>一室二厅</a>
+                        <br>
+                        <a class="smallfont">楼层：</a><a class="smallfont">15/30</a>
+                    </div>
+                    <div class="area">
+                        <span class="red">10</span><a>㎡</a>
+                    </div>
+
+                    <div class="price">
+                        <span class="red">500</span><a class="smallfont">元/月</a>
+                    </div>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

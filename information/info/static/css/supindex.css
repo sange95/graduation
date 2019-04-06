@@ -1,0 +1,149 @@
+#halfright {
+    width: 915px;
+    height: 800px
+}
+
+#recycle {
+    border: 2px solid  #009afc;
+    height: 800px;
+    width: 263.8px;
+    margin-left: 5%;
+    margin-right: 15px; 
+    display: block;
+}
+.container-fluid {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+#question {
+    width: 238px;
+    height: 385px;
+    margin-left: 15px;
+}
+#halfright {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+#news {
+    width: 440px;
+    height: 415px;
+}
+#home {
+    width: 440px;
+    height: 415px;
+    margin-left: 32px;
+}
+#hntitle {
+    margin-top: 10px;
+    border-bottom: 5px solid #f1dbdb;
+}
+#hntitle a{
+    background-color:  #f1dbdb;
+    font-weight: bold;
+}
+#recycletitle {
+    background-color: #009afc;
+}
+.recyclediv{
+    display: inline-flex;
+    height: 192px;
+    border-bottom: 5px solid #009afc;
+}
+.recycleimg img {
+    width: 180px;
+    height: 180px;
+    margin-right: 5px;
+}
+.recycletext{
+    position: relative;
+}
+.recycletext span {
+    position: absolute;
+    bottom: 0;
+    color: red;
+}
+#questiontitle{
+    background-color: #f1dbdb;
+}
+#recycletitle a {
+    font-weight: bold;
+}
+
+#questiontitle a {
+    font-weight: bold;
+}
+#questionlist ul {
+    position: relative;
+}
+#questionlist ul li {
+    position: absolute;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    background-color: #009afc;
+    border-radius: 50%  50%  50%  50%;
+}
+
+#questionlist ul a{
+    margin-left: 15px;
+    white-space: nowrap;
+    width: 240px;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+}
+#questionlist ul{
+  margin-top: 10px;
+  margin-bottom: 10px;
+} 
+#newslist ul {
+    display: inline-flex;
+    border-bottom: 1px solid #f1dbdb;
+    padding: 5px;
+    width: 435px;
+    margin-bottom: 0%;
+} 
+.newimgdiv {
+    width: 100px;
+    height: 62px;
+    margin-right: 5px;
+}
+.newimgdiv img {
+    width: 100px;
+    height: 62px;
+}
+.newtitle .title a{
+    font-size: 20px;
+    white-space: nowrap;
+    width: 330px;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+}
+.clasfiy {
+    font-size: 12px;
+    padding: 1px 2px;
+    border: 1px solid #009afc;
+    margin-right: 10px;
+}
+ .newtitle {
+     position: relative;
+ }
+
+ .newtitle .newitem{
+    position: absolute;
+    bottom: 0px;
+}
+.smallfont {
+    font-size: 10px;
+}
+#home div ul div {
+    width: 100px;
+    
+}
+.red {
+    font-size: 30px;
+    color: red;
+}
