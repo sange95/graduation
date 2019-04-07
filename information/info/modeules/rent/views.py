@@ -4,7 +4,7 @@ from flask import render_template
 
 @rent_bul.route("/index", methods=["get"])
 def index():
-    print("ccccccccccccc")
+    # print("ccccccccccccc")
     data = "ccc"
     return render_template("rent/index.html", data=data)
 

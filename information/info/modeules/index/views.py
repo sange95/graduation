@@ -56,7 +56,7 @@ def news_list():
     return jsonify(errno=RET.OK, errmsg="ok", data=data)
 
 
-@index_blu.route('/')
+@index_blu.route('/new_index')
 @user_login_data
 def index():
     # redis_store.set('name', 'huanghaibo')
@@ -118,7 +118,28 @@ def cluster():
     return jsonify({"hahha": "hahahh"})
 
 
-@index_blu.route('/supindex')
+@index_blu.route('/')
+@user_login_data
 def supindex():
-    data = "ccc"
-    return render_template("/supindex.html", data=data)
+    # redis_store.set('name', 'huanghaibo')
+    """
+    显示首页
+    1,如果用户已经登录，将当前登录用户的数据传到模板中，显示
+    :return:
+    """
+    user_id = session.get('user_id', None)
+    user = None
+    if user_id:
+        try:
+            user = User.query.get(user_id)
+            print(user)
+        except Exception as e:
+            current_app.logger.error(e)
+    user = g.user
+
+    data = {
+        "user": user.to_dict() if user else None,
+    }
+    return render_template('supindex.html',
+                           data=data,
+                           )

@@ -1,3 +1,5 @@
+import random
+import re
 from pprint import pprint
 
 import requests
@@ -5,10 +7,11 @@ from lxml import etree
 from copy import deepcopy
 from pymongo import MongoClient
 
-from config import HOST, POST
+from config import HOST, POST, DBNAME, SETNAME
 
 
 class fangtianxia:
+    A = 1
     def __init__(self):
         self.start_url = "https://zz.zu.fang.com/"
         self.url_header = "https://zz.zu.fang.com"
@@ -20,13 +23,18 @@ class fangtianxia:
             "Cookie": "integratecover=1; global_cookie=ne8iwofvlvqjz1olucfej3bhn1yjtwi3l41; city=zz; g_sourcepage=undefined; ASP.NET_SessionId=yvxg3pozpoz2qzx0rnvu4s3h; Rent_StatLog=502eca23-ff7f-4cdb-b52a-6544c89d6e33; keyWord_recenthousezz=%5b%7b%22name%22%3a%22%e9%87%91%e6%b0%b4%e5%8c%ba%22%2c%22detailName%22%3a%22%22%2c%22url%22%3a%22%2fhouse-a0362%2f%22%2c%22sort%22%3a1%7d%2c%7b%22name%22%3a%22%e6%b1%bd%e9%85%8d%e5%a4%a7%e4%b8%96%e7%95%8c%22%2c%22detailName%22%3a%22%e9%87%91%e6%b0%b4%e5%8c%ba%22%2c%22url%22%3a%22%2fhouse-a0362-b02929%2f%22%2c%22sort%22%3a2%7d%5d; Captcha=4367676249316B646671665A69767657637A72336375754E627467782F75313169585A52477967377A72324A306E65705952786C775964573631353136796A7045496261335969474273553D; unique_cookie=U_2a4pv3cxivdhxuvjufoep0own3pju3gwd32*13",
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
         }
+    # def save_img(self, url_list):
+    #     for url in url_list:
+    #         resp = self.start(url).content.decode('utf8')
+    #
 
-    def get_detail_info(self, resp, local):
-        pass
+    # def get_detail_info(self, resp, local):
+    #     pass
 
     def get_detail(self, local_list):
         # print(local_list)
         for local in local_list:
+            print(local["local"])
             # 保存每个大区,房子详情url
             # print(local)
             info_list = list()
@@ -35,29 +43,66 @@ class fangtianxia:
             html = etree.HTML(resp)
             detail_list = html.xpath("//div[@class='houseList']/dl[@class='list hiddenMap rel']//dd[@class='info rel']/p[1]/a/@href")
             # print(etree.tostring(dl_list).decode())
-            for detail_url in detail_list:
+            for detail_url in detail_list[:10]:
+                self.A += 1
+                print(self.A)
                 items = deepcopy(local)
+                items["_id"] = self.A
                 items["detail_url"] = self.url_header + detail_url
                 resp = self.start1(items["detail_url"]).content.decode("gbk")
                 html = etree.HTML(resp)
                 items['title'] = html.xpath('//div[@class="tab-cont clearfix"]/h1/text()')
                 # print(len(html.xpath("//a[@id='agantzfxq_C02_05']/div[@class='bigImg']/img[1]/@src")[0]))
-                items['image_url'] = "https:" + html.xpath("//a[@id='agantzfxq_C02_05']/div[@class='bigImg']/img[1]/@src")[0]
+                img_url = html.xpath("//a[@id='agantzfxq_C02_05']/div[@class='bigImg']/img/@src")
+                img_url = ["https"+ url for url in img_url]
+                items['image_url'] = img_url
+
                 # print(items)
                 items['money'] = html.xpath("//div[@class='trl-item sty1']/i/text()")[0]
+                zhifu = html.xpath("//div[@class='trl-item sty1']/text()")[0]
      #            print(html.xpath("//div[@class='tab-cont-right']/div[5]/div[1]/div[2]/a/text()")
      # )
+                zhifu = re.sub(r"(元/月\（)|(\）)",'',zhifu)
+                # print(zhifu)
+                # items["_id"] = items["local"]
+                # div_list = html.xpath("//div[@class='tab-cont-right']/div[3]")
+                items['chuzufangshi'] = html.xpath('//div[@class="tab-cont-right"]/div[3]/div[@class="trl-item1 w146"]/div[@class="tt"]/text()')[0]
+                items["huxing"] = html.xpath('//div[@class="tab-cont-right"]/div[3]/div[2]/div[@class="tt"]/text()')[0]
+                items["jianzumianji"] = html.xpath("//div[@class='tab-cont-right']/div[3]/div[3]/div[@class='tt']/text()")[0]
+                divs = html.xpath("//div[@class='tab-cont-right']/div[4]")[0]
+                items["chaoxiang"] = divs.xpath("//div[@class='tab-cont-right']/div[4]/div[1]/div[@class='tt']/text()")[0]
+                items["zongloucheng"] = divs.xpath("//div[@class='tab-cont-right']/div[4]/div[2]/div[@class='font14']/text()")[0]
+                items["loucheng"] = divs.xpath("//div[@class='tab-cont-right']/div[4]/div[2]/div[@class='tt']/text()")[0]
+                items["zhuangxiu"] = divs.xpath("//div[@class='tab-cont-right']/div[4]/div[3]/div[@class='tt']/text()")[0]
+
+                items['zhifufangshi'] = zhifu
                 items['xiaoqu_name'] = html.xpath("//div[@class='tab-cont-right']/div[5]/div[1]/div[2]/a/text()")
                 items['dizhi'] = html.xpath("//div[@class='tab-cont-right']/div[5]/div[2]/div[@class='rcont']/a/text()")[0]
                 # items['ruzhu_time'] = html.xpath("//div[@class='tab-cont-right']/div[5]/div[3]/div[@class='rcont']//text()")[0]
-                items['house_person'] = html.xpath("//div[@class='trlcont rel']/div[1]/div/a[1]/text()")[0]
+                str_list = html.xpath("//div[@class='trlcont rel']/div[1]/div//a[1]/text()")
+                # pprint(items['house_person'])
+                str = ''
+                for i in str_list:
+                    str += i
+                # print(str)
+                ret = re.findall('\w+', str)[0]
+
+                items['house_person'] = ret
+                # print(ret)
                 items['phone'] = html.xpath("//div[@class='tjcont-list-cline2 tjcont_gs clearfix']/p/text()")[0]
+                items['liulanrenshu'] = random.randint(500,1500)
+
+
                 # pprint(items)
+                # 保存图片在本地
+
+
+
                 # print(len(html.xpath("//div[@class='tjcont-list-cline2 tjcont_gs clearfix']/p/text()")[0]))
                 # 保存到mongodb
 
                 client = MongoClient(HOST, POST)
-                collection = client["72bian"]["zufang"]
+                collection = client[DBNAME][SETNAME]
                 collection.insert(items)
 
 

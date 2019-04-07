@@ -7,9 +7,11 @@
 {% endblock %}
 {% block categoryBlock %}
 <ul class="menu fl">
-{% for category in data.category_li %}
-    <li data-cid="{{ category.id }}"><a href="/?cid={{ category.id }}">{{ category.name }}</a></li>
-{% endfor %}
+<li data-cid=""><a href="http://127.0.0.1:5000/new_index">新闻资讯</a></li>
+                <li data-cid=""><a href="javascript:;">二手商城</a></li>
+                <li data-cid=""><a href="javascript:;">问答咨询</a></li>
+                <li data-cid=""><a href="javascript:;">回收预约</a></li>
+                <li data-cid=""><a href="javascript:;">租房查询</a></li>
 </ul>
 {% endblock %}
 {% block contentBlock %}
