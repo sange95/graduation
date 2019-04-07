@@ -5,7 +5,9 @@ from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
 from flask_wtf.csrf import generate_csrf
+from pymongo import MongoClient
 from redis import StrictRedis
+
 
 # from config import Config
 from config import config
@@ -15,6 +17,8 @@ from config import config
 
 db = SQLAlchemy()
 redis_store = None  # type: StrictRedis
+collection = None   # type: MongoClient
+
 
 
 def setup_log(config_name):
@@ -42,6 +46,10 @@ def create_app(config_name):
     global redis_store
     redis_store = StrictRedis(host=config[config_name].REDIS_HOST, port=config[config_name].REDIS_PORT,
                               decode_responses=True)
+    # 初始化mongodb
+    global collection
+    client = MongoClient(config[config_name].MONGODB_HOST, config[config_name].MONGODB_PORT)
+    collection = client[config[config_name].MONGODB_NAME][config[config_name].MONGODB_SET]
     # 开启当前项目的CSRF保护
     # CSRF帮我们做了： cookie取出随机值，表单中取出随机值，进行校验，返回响应结果
     # 没有帮我们做：1，在界面加载的时候，网cookie中添加有一个csrf_token,并且在表单中添加个隐藏的csrf_token

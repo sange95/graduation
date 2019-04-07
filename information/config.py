@@ -1,6 +1,7 @@
 import logging
 
 from redis import StrictRedis
+from pymongo import MongoClient
 
 
 class Config(object):
@@ -13,6 +14,7 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # 在请求结束的时候，如果指定此配置为True，那么SQLAlchemy会自动执行一次db.session.commit()操作
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+
 
     # Redis的配置
     REDIS_HOST = '47.99.62.36'
@@ -30,6 +32,12 @@ class Config(object):
 
     # 设置日志等级
     LOG_LEVEL = logging.DEBUG
+    # mongodb的配置
+    MONGODB_HOST = "127.0.0.1"
+    MONGODB_PORT = 27017
+    MONGODB_NAME = 'sun'
+    MONGODB_SET = 'sun'
+
 
 
 class DevelopmentConfig(Config):
