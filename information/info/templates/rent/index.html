@@ -239,58 +239,60 @@
             </div>
         </div>
         <div id="listdiv">
-            <ul>
-                <div class="data">
-                    <div class="rent-img">
-                        <img src="../../static/imgs/house.jpg" alt="">
+            {% for info in data["info"] %}
+                <ul>
+                    <div class="data">
+                        <div class="rent-img">
+                            <a href="/rent/detail?id={{ info['_id'] }}"><img src="{{ info["image_url"][0][:5] + ":" + info["image_url"][0][5:] }}" alt=""></a>
+                        </div>
+                        <div class="rent-info">
+                            <a href = "/rent/detail?id={{ info['_id'] }}"><h5 class="rent-title">{{ info["title"][0] }}</h5></a>
+                            <p class="rent-detail">{{ info["huxing"] }}<span>|</span>{{ info["jianzumianji"] }}<span>|</span>{{ info["loucheng"] }}/{{ info["zongloucheng"] }}<span>|</span>{{ info['chuzufangshi'] }}</p>
+                            <p class="rent-adress">{{ info["xiaoqu_name"][0] }}&nbsp;&nbsp;{{ info["dizhi"] }}</p>
+                        </div>
+                        <div class="rent-price">{{ info["money"] }}<strong>元/月</strong></div>
                     </div>
-                    <div class="rent-info">
-                        <h5 class="rent-title">中心花园长江路淮南街精装小次卧价格便宜随时看房非中介</h5>
-                        <p class="rent-detail">2室1厅<span>|</span>30平米<span>|</span>3/6层<span>|</span>整租</p>
-                        <p class="rent-adress">兰多喜多家&nbsp;&nbsp;二七-古玩城嵩山路190号</p>
-                    </div>
-                    <div class="rent-price">100<strong>元/月</strong></div>
-                </div>
-            </ul>
-            <ul>
-                <div class="data">
-                    <div class="rent-img">
-                        <img src="../../static/imgs/house.jpg" alt="">
-                    </div>
-                    <div class="rent-info">
-                        <h5 class="rent-title">中心花园长江路淮南街精装小次卧价格便宜随时看房非中介</h5>
-                        <p class="rent-detail">2室1厅<span>|</span>30平米<span>|</span>3/6层<span>|</span>整租</p>
-                        <p class="rent-adress">兰多喜多家&nbsp;&nbsp;二七-古玩城嵩山路190号</p>
-                    </div>
-                    <div class="rent-price">100<strong>元/月</strong></div>
-                </div>
-            </ul>
-            <ul>
-                <div class="data">
-                    <div class="rent-img">
-                        <img src="../../static/imgs/house.jpg" alt="">
-                    </div>
-                    <div class="rent-info">
-                        <h5 class="rent-title">中心花园长江路淮南街精装小次卧价格便宜随时看房非中介</h5>
-                        <p class="rent-detail">2室1厅<span>|</span>30平米<span>|</span>3/6层<span>|</span>整租</p>
-                        <p class="rent-adress">兰多喜多家&nbsp;&nbsp;二七-古玩城嵩山路190号</p>
-                    </div>
-                    <div class="rent-price">100<strong>元/月</strong></div>
-                </div>
-            </ul>
-            <ul>
-                <div class="data">
-                    <div class="rent-img">
-                        <img src="../../static/imgs/house.jpg" alt="">
-                    </div>
-                    <div class="rent-info">
-                        <h5 class="rent-title">中心花园长江路淮南街精装小次卧价格便宜随时看房非中介</h5>
-                        <p class="rent-detail">2室1厅<span>|</span>30平米<span>|</span>3/6层<span>|</span>整租</p>
-                        <p class="rent-adress">兰多喜多家&nbsp;&nbsp;二七-古玩城嵩山路190号</p>
-                    </div>
-                    <div class="rent-price">100<strong>元/月</strong></div>
-                </div>
-            </ul>
+                </ul>
+            {% endfor %}
+{#            <ul>#}
+{#                <div class="data">#}
+{#                    <div class="rent-img">#}
+{#                        <img src="../../static/imgs/house.jpg" alt="">#}
+{#                    </div>#}
+{#                    <div class="rent-info">#}
+{#                        <h5 class="rent-title">中心花园长江路淮南街精装小次卧价格便宜随时看房非中介</h5>#}
+{#                        <p class="rent-detail">2室1厅<span>|</span>30平米<span>|</span>3/6层<span>|</span>整租</p>#}
+{#                        <p class="rent-adress">兰多喜多家&nbsp;&nbsp;二七-古玩城嵩山路190号</p>#}
+{#                    </div>#}
+{#                    <div class="rent-price">100<strong>元/月</strong></div>#}
+{#                </div>#}
+{#            </ul>#}
+{#            <ul>#}
+{#                <div class="data">#}
+{#                    <div class="rent-img">#}
+{#                        <img src="../../static/imgs/house.jpg" alt="">#}
+{#                    </div>#}
+{#                    <div class="rent-info">#}
+{#                        <h5 class="rent-title">中心花园长江路淮南街精装小次卧价格便宜随时看房非中介</h5>#}
+{#                        <p class="rent-detail">2室1厅<span>|</span>30平米<span>|</span>3/6层<span>|</span>整租</p>#}
+{#                        <p class="rent-adress">兰多喜多家&nbsp;&nbsp;二七-古玩城嵩山路190号</p>#}
+{#                    </div>#}
+{#                    <div class="rent-price">100<strong>元/月</strong></div>#}
+{#                </div>#}
+{#            </ul>#}
+{#            <ul>#}
+{#                <div class="data">#}
+{#                    <div class="rent-img">#}
+{#                        <img src="../../static/imgs/house.jpg" alt="">#}
+{#                    </div>#}
+{#                    <div class="rent-info">#}
+{#                        <h5 class="rent-title">中心花园长江路淮南街精装小次卧价格便宜随时看房非中介</h5>#}
+{#                        <p class="rent-detail">2室1厅<span>|</span>30平米<span>|</span>3/6层<span>|</span>整租</p>#}
+{#                        <p class="rent-adress">兰多喜多家&nbsp;&nbsp;二七-古玩城嵩山路190号</p>#}
+{#                    </div>#}
+{#                    <div class="rent-price">100<strong>元/月</strong></div>#}
+{#                </div>#}
+{#            </ul>#}
             <div id="navigation"></div>
         </div>
     </div>
