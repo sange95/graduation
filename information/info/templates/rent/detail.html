@@ -114,6 +114,26 @@
         color: white;
         padding-top: 20px;
     }
+    #apartment-title {
+        padding-bottom: 20px;
+        margin-top: 30px;
+        font-size: 30px;
+        border-bottom: lightgray solid 1px;
+    }
+    #apartment-des li div {
+        display: inline-block;
+    }
+    #apartment-des li .title {
+        width: 10%;
+        font-size: 14px;
+        color: gray;
+    }
+    #apartment-des li .text {
+        width: 80%;
+    }
+    #apartment-des li {
+        margin: 20px 0px 20px 0px;
+    }
 </style>
 {% endblock %}
 {% block contentBlock %}
@@ -173,5 +193,39 @@
             </div>
         </div>
     </div>
+    <div id="apartment-title">
+        房源描述
+    </div>
+    <ul id="apartment-des">
+        <li>
+            <div class="title">小区介绍</div>
+            <div class="text">国泰罗马假日项目占地面积66188.1平方米，总建筑面积214887.08平方米，
+                罗马假日由七栋高层和一个南北纵深150米的内庭院组成。
+                七栋高层均为板式与蝶式相结合的短板楼建筑形态。建筑面积176969.45平方米，
+                楼1栋，建筑面积16108平方米，其他为地下室及地下车库建筑面积。
+                罗马假日项目位于花园路与北环路交会处，郑州主干道花园路核心位置，
+                由国泰房地产发展(郑州)有限公司开发。</div>
+        </li>
+        <li>
+                <div class="title">房源亮点</div>
+                <div class="text">房子在花园路北三环罗马假日小区汽配大世界沙门地铁口黄河建工居易摩根附近
+                        房间配置双人床，大衣柜，电脑桌椅，新空调，房间15-20平米左右
+                        房间干净卫生配置齐全，拎包即可入住，随时可以入住</div>
+            </li>
+            <li>
+                    <div class="title">周边配套</div>
+                    <div class="text">大学：河南大学郑州、省农业广播电视大学、郑州成人中专、省实验成人中等专业华北水利水电大学等
+                            中：郑州市七十六中、柳林、郑州十一中北校、郑州市七中、马李庄、世纪先锋、杨君刘等
+                            幼儿园：世纪先锋幼儿园、柳林幼儿园、天爱国际幼儿园、慧聪成艺术幼儿园、喜洋洋幼儿园等
+                            商场：家乐福、丹尼斯百货、世纪联华、中环百货、郑商生活超市、满亿100连锁便利店等
+                            邮局：北环路邮局、华北水院邮政所等
+                            银行：中国农业银行、工商银行、光大银行、兴业银行浦发银行平安银行交通银行建设银行等
+                            医院：新世纪动物医院、河南省中医院21世纪门诊部、金水肛泰医院、郑州德馨中医、河南</div>
+                </li>
+                <li>
+                        <div class="title">交通出行</div>
+                        <div class="text">乘坐62路、32路、K6路、90路、220路、94路、39路等，在汽配大世界站下车</div>
+                    </li>
+    </ul>
 </div>
 {% endblock %}
