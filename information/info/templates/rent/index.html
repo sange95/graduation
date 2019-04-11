@@ -178,7 +178,7 @@
         <div class="area">
             <div class="area-title"><span style="color: #999999">区域：</span></div>
             <div class="area-elems">
-                <span class="item-elems">
+                <span class="item-elems" id="sp">
                     <a class="elem all active">全部</a>
                     <a class="elem">郑东新区</a>
                     <a class="elem">经开区</a>
@@ -243,56 +243,18 @@
                 <ul>
                     <div class="data">
                         <div class="rent-img">
-                            <a href="/rent/detail?id={{ info['_id'] }}"><img src="{{ info["image_url"][0][:5] + ":" + info["image_url"][0][5:] }}" alt=""></a>
+                            <a href="/rent/detail/{{ info["_id"] }}"><img src="{{ info["image_url"][0][:5] + ":" + info["image_url"][0][5:] }}" alt=""></a>
                         </div>
                         <div class="rent-info">
-                            <a href = "/rent/detail?id={{ info['_id'] }}"><h5 class="rent-title">{{ info["title"][0] }}</h5></a>
-                            <p class="rent-detail">{{ info["huxing"] }}<span>|</span>{{ info["jianzumianji"] }}<span>|</span>{{ info["loucheng"] }}/{{ info["zongloucheng"] }}<span>|</span>{{ info['chuzufangshi'] }}</p>
+                            <a href = "/rent/detail/{{ info["_id"] }}"><h5 class="rent-title">{{ info["title"][0] }}</h5></a>
+                            <p class="rent-detail">{{ info["huxing"] }}<span>|</span>{{ info["jianzumianji"] }}<span>|</span>{{ info["loucheng"] }}/{{ info["zongloucheng"] }}<span>|</span>{{ info["chuzufangshi"] }}</p>
                             <p class="rent-adress">{{ info["xiaoqu_name"][0] }}&nbsp;&nbsp;{{ info["dizhi"] }}</p>
                         </div>
                         <div class="rent-price">{{ info["money"] }}<strong>元/月</strong></div>
                     </div>
                 </ul>
             {% endfor %}
-{#            <ul>#}
-{#                <div class="data">#}
-{#                    <div class="rent-img">#}
-{#                        <img src="../../static/imgs/house.jpg" alt="">#}
-{#                    </div>#}
-{#                    <div class="rent-info">#}
-{#                        <h5 class="rent-title">中心花园长江路淮南街精装小次卧价格便宜随时看房非中介</h5>#}
-{#                        <p class="rent-detail">2室1厅<span>|</span>30平米<span>|</span>3/6层<span>|</span>整租</p>#}
-{#                        <p class="rent-adress">兰多喜多家&nbsp;&nbsp;二七-古玩城嵩山路190号</p>#}
-{#                    </div>#}
-{#                    <div class="rent-price">100<strong>元/月</strong></div>#}
-{#                </div>#}
-{#            </ul>#}
-{#            <ul>#}
-{#                <div class="data">#}
-{#                    <div class="rent-img">#}
-{#                        <img src="../../static/imgs/house.jpg" alt="">#}
-{#                    </div>#}
-{#                    <div class="rent-info">#}
-{#                        <h5 class="rent-title">中心花园长江路淮南街精装小次卧价格便宜随时看房非中介</h5>#}
-{#                        <p class="rent-detail">2室1厅<span>|</span>30平米<span>|</span>3/6层<span>|</span>整租</p>#}
-{#                        <p class="rent-adress">兰多喜多家&nbsp;&nbsp;二七-古玩城嵩山路190号</p>#}
-{#                    </div>#}
-{#                    <div class="rent-price">100<strong>元/月</strong></div>#}
-{#                </div>#}
-{#            </ul>#}
-{#            <ul>#}
-{#                <div class="data">#}
-{#                    <div class="rent-img">#}
-{#                        <img src="../../static/imgs/house.jpg" alt="">#}
-{#                    </div>#}
-{#                    <div class="rent-info">#}
-{#                        <h5 class="rent-title">中心花园长江路淮南街精装小次卧价格便宜随时看房非中介</h5>#}
-{#                        <p class="rent-detail">2室1厅<span>|</span>30平米<span>|</span>3/6层<span>|</span>整租</p>#}
-{#                        <p class="rent-adress">兰多喜多家&nbsp;&nbsp;二七-古玩城嵩山路190号</p>#}
-{#                    </div>#}
-{#                    <div class="rent-price">100<strong>元/月</strong></div>#}
-{#                </div>#}
-{#            </ul>#}
+
             <div id="navigation"></div>
         </div>
     </div>
@@ -302,6 +264,51 @@
 {% block scriptBlock %}
 <script type="text/javascript">
     $(document).ready(function(){
+        var $sp = $("#sp");
+        $sp.delegate('a','click',function () {
+            alert($(this).html())
+            $.get("/rent/sort?local="+$(this).html(),
+{#                 {'local':$(this).html()},#}
+{#                alert($(this).html()),#}
+{#                alert("2222"),#}
+                function(data){
+{#                alert("33333")#}
+                    // 清空数据
+                    $("#listdiv").html('');
+{#                    alert("11111");#}
+                    for (var i=0;i<data.data.info.length;i++){
+                        var info = data.data.info[i];
+                        var images = info["image_url"][0].split("//");
+{#                        console.log(images);#}
+                        var image_url = images[0] + "://" + images[1];
+                        console.log(image_url)
+                        console.log(info["_id"])
+                        console.log(info["_id"])
+
+
+{#                        img_url = info["image_url"][0]#}
+                        var content = '<ul> <div class="data">';
+                            content += '<div class="rent-img">';
+                            content += '<a href="/rent/detail/'+info["_id"]+'"><img src="'+ image_url+'" alt=""></a></div>';
+                            content += '<div class="rent-info"><a href = "/rent/detail/' +info["_id"] +'"><h5 class="rent-title">'+ info["title"][0]+'</h5></a>';
+                            content += '<p class="rent-detail">'+ info["huxing"] +'<span>|</span>'+ info["jianzumianji"] +'<span>|</span>'+ info["loucheng"] +'/'+ info["zongloucheng"] +'<span>|</span>'+ info["chuzufangshi"] +'</p>';
+                            content += '<p class="rent-adress">'+ info["xiaoqu_name"][0] +'&nbsp;&nbsp;'+ info["dizhi"] +'</p></div>';
+                            content += '<div class="rent-price">'+ info["money"]+'<strong>元/月</strong></div>';
+                            content += '</div></ul>';
+{#                        content += '<a href="/news/'+news.id+'" class="news_pic fl"><img src="' + news.index_image_url + '?imageView2/1/w/170/h/170"></a>'#}
+{#                        content += '<a href="/news/'+news.id+'" class="news_title fl">' + news.title + '</a>'#}
+{#                        content += '<a href="/news/'+news.id+'" class="news_detail fl">' + news.digest + '</a>'#}
+{#                        content += '<div class="author_info fl">'#}
+{#                        content += '<div class="source fl">来源：' + news.source + '</div>'#}
+{#                        content += '<div class="time fl">' + news.create_time + '</div>'#}
+{#                        content += '</div>'#}
+{#                        content += '</li>'#}
+                        $("#listdiv").append(content)
+                    }
+
+                })
+{#            alert(1111)#}
+        })
         //每页显示的数目
         var show_per_page = 5; 
         //获取content对象里面，数据的数量
@@ -372,6 +379,9 @@
          
         //update the current page input field
         $('#current_page').val(page_num);
+
+
+
     }   
 </script>
 {% endblock %}
