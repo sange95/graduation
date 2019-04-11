@@ -40,7 +40,6 @@ def detail():
     return render_template("rent/detail.html", data=data)
 
 
-
 @rent_bul.route("/index", methods=["get"])
 @user_login_data
 def index():
@@ -75,7 +74,7 @@ def index():
 
         if j == 6:
             break
-    print(a_list)
+    # print(a_list)
     data = {
         "user": user,
         "info": a_list
