@@ -1,7 +1,6 @@
 var cur_page = 1; // 当前页
 var total_page = 1;  // 总页数
 var data_querying = true;   // 是否正在向后台获取数据
-console.log("kkkkkkkkk")
 $(function () {
     // 界面加载完成后加载新闻
     updateNewsData();

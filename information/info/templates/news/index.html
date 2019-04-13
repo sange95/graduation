@@ -4,14 +4,14 @@
     首页-新经资讯
 {% endblock %}
 
-{% block scriptBlock %}
-    <script type="text/javascript" src="../../static/news/js/index.js" charset="utf-8"></script>
-    <script type="text/javascript">
-    console.log("jjjjjjjjjjjj")
-    var currentCid = {{ data.cid|tojson }}
-    </script>
-{% endblock %}
 {% block contentBlock %}
 <ul class="list_con fl">
         </ul>
+{% endblock %}
+
+{% block scriptBlock %}
+    <script type="text/javascript" src="../../static/news/js/index.js" charset="utf-8"></script>
+    <script type="text/javascript">
+    var currentCid = {{ data.cid|tojson }}
+</script>
 {% endblock %}
