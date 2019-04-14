@@ -1,7 +1,7 @@
-HOST = '127.0.0.1'
+HOST = '47.99.62.36'
 POST = 27017
-DBNAME = "sun"
-SETNAME = 'sun'
+DBNAME = "sl"
+SETNAME = 'sl'
 
 
 

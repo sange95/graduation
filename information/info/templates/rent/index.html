@@ -249,7 +249,7 @@
                 <ul>
                     <div class="data">
                         <div class="rent-img">
-                            <a href="/rent/detail?id={{ info['_id'] }}"><img src="{{ info["image_url"][0][:5] + ":" + info["image_url"][0][5:] }}" alt=""></a>
+                            <a href="/rent/detail/{{ info["_id"] }}"><img src="{{ info["image_url"][0][:5] + ":" + info["image_url"][0][5:] }}" alt=""></a>
                         </div>
                         <div class="rent-info">
                             <a href = "/rent/detail?house_id={{ info['_id'] }}"><h5 class="rent-title">{{ info["title"][0] }}</h5></a>
