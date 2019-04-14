@@ -11,11 +11,11 @@
     <script type="text/javascript" src="../../static/js/jquery-3.2.1/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="../../static/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../static/news/js/main.js"></script>
-    {% block cssBlock %}
-
+    {% block head %}
     {% endblock %}
-{#    <script type="text/javascript" src="../../static/news/js/index.js"></script>#}
 </head>
+{% block cssBlock %}
+{% endblock %}
 <body>
     <div class="header_con">
         <div class="header">
@@ -23,9 +23,9 @@
   
             <ul class="menu fl">
                 <li data-cid=""><a href="/new_index">新闻资讯</a></li>
-                <li data-cid=""><a href="">二手商城</a></li>
-                <li data-cid=""><a href="javascript:;">问答咨询</a></li>
-                <li data-cid=""><a href="javascript:;">回收预约</a></li>
+                <li data-cid=""><a href="/store">二手商城</a></li>
+                <li data-cid=""><a href="/question">问答咨询</a></li>
+                <li data-cid=""><a href="/appointment/index">回收预约</a></li>
                 <li data-cid=""><a href="/rent/index">租房查询</a></li>
             </ul>
 
@@ -61,7 +61,7 @@
             <a href="">友情链接</a>
         </div>
         <p class="copyright">
-            CopyRight © 2018 新经资讯信息技术有限公司 All Rights Reserved<br />
+            CopyRight © 2019 新经资讯信息技术有限公司 All Rights Reserved<br />
 电话：010-****888    京ICP备*******8号
         </p>
     </div>

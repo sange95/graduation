@@ -102,7 +102,7 @@ def sendMail():
         send_mail.send(msg)
         return jsonify({"msg": "", 'status': "200"})
     else:
-        return jsonify({"msg": "检测到该邮箱已经被注册，一个邮箱只有一个南工二手交易平台账号", 'status': "500"})
+        return jsonify({"msg": "检测到该邮箱已经被注册，一个邮箱只有一个72便交易平台账号", 'status': "500"})
 
 
 @user_dp.route("/userInfo")
