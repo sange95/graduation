@@ -2,3 +2,248 @@
 {% block titleBlock %}
 72Bian/回收预约
 {% endblock %}
+{% block cssBlock %}
+<style>
+    .main {
+        width: 1000px;
+        margin: 0 auto;
+        display: flex;
+    }
+
+    p.text {
+        line-height: 25px;
+        border: 1px solid #1CB0F6;
+        margin-bottom: 20px;
+        padding: 10px 20px;
+        font-size: 13px;
+        color: gray;
+    }
+
+    #document h3 {
+        display: block;
+        height: 15px;
+        line-height: 10px;
+        margin-bottom: 8px;
+        color: #1CB0F6;
+        font-size: 18px;
+        font-family: 微软雅黑;
+    }
+
+    #document {
+        width: 25%;
+        display: inline-block;
+    }
+
+    #recycle {
+        width: 74%;
+        border: 1px solid #1CB0F6;
+        display: inline-block;
+        margin-left: 1%;
+        padding: 10px 10px 10px 10px;
+    }
+
+    #recycle strong {
+        display: block;
+        height: 30px;
+        line-height: 30px;
+        border-bottom: 1px dashed #e9e9e9;
+        margin-bottom: 10px;
+        font-size: 10px;
+        color: gray
+    }
+
+    #recycle strong b {
+        float: right;
+        color: #ff9000;
+    }
+
+    #recycle dl dt {
+        display: block;
+        height: 26px;
+        line-height: 26px;
+        text-align: center;
+        color: #FFF;
+        background-color: #1CB0F6;
+        font-size: 14px
+    }
+
+    #recycle dl dd {
+        display: block;
+        text-align: center;
+        padding: 8px;
+        font-size: 14px;
+        margin-bottom: 0px;
+        color: gray
+    }
+
+    #recycle dl {
+        display: block;
+        border: 1px solid #1CB0F6;
+        margin-bottom: 14px;
+    }
+    .tdbg {
+        height: 30px;
+        line-height: 30px;
+    }
+    tbody {
+        font-size: 14px;
+    }
+</style>
+{% endblock %}
+{% block contentBlock %}
+<div class="main">
+    <div id="document">
+        <h3>回收政策</h3>
+        <p class="text">
+            1.各回收网点严格按照国家制定的相关再生资源回收管理规章制度，违者追究相关负责人责任；
+            <br>
+            <br>
+            2.各回收网点严格按照集团总部制定的回收章程，违者追究相关负责人责任；
+            <br>
+            <br>
+            3.各回收网点严格把关所回收物资；
+            <br>
+            <br>
+            4.各回收网点严格遵守工作守则，行为举止文明；
+            <br>
+            <br>
+            5.各回收网点公正严明对待每位客户
+        </p>
+        <h3>回收流程</h3>
+        <p class="text">
+            第一步：填写在线回收预约表单提交
+            <br>
+            第二步：平台后台确认
+            <br>
+            第三步：短信确认
+            <br>
+            第四步：安排回收站点上门回收
+            <br>
+            第五步：费用结算
+        </p>
+    </div>
+    <div id="recycle">
+        <strong>回收范围 <b>咨询热线：025-82221863</b></strong>
+        <dl>
+            <dt>黑色金属</dt>
+            <dd>各种废旧钢材和旧机器设备及各式易拉罐</dd>
+        </dl>
+        <dl>
+            <dt>有色金属</dt>
+            <dd>铜、铝、铅、锌等各类有色金属</dd>
+        </dl>
+        <dl>
+            <dt>废塑料</dt>
+            <dd>ABS、PP、PVC、PU、PE等各类废旧塑料</dd>
+        </dl>
+        <dl>
+            <dt>旧家电、电子产品</dt>
+            <dd>电视机、电冰箱、洗衣机、空调、厨房设备、音响、小家电、电脑、手机等</dd>
+        </dl>
+        <dl>
+            <dt>废 纸</dt>
+            <dd>废纸包括书本纸、箱板纸、报纸、印刷纸等。</dd>
+        </dl>
+        <strong>在线回收</strong>
+        <table width="100%" cellspacing="2" cellpadding="1">
+            <form name="myform" action="post_guest.php" method="post"></form>
+            <input type="hidden" value="Save" name="action">
+            <input type="hidden" value="2" name="id">
+            <tbody>
+                <tr class="tdbg">
+                    <td  class="lefttdbg">姓名或单位名称：</td>
+                    <td><input type="text" class="upfile" style="width:200px" name="KS_姓名" value="">
+                        <font color="red"> * </font>
+                    </td>
+                </tr>
+                <tr class="tdbg">
+                    <td class="lefttdbg">联系电话：</td>
+                    <td><input type="text" class="upfile" style="width:200px" name="KS_联系电话" value="">
+                        <font color="red"> * </font>
+                    </td>
+                </tr>
+                <tr class="tdbg">
+                    <td class="lefttdbg">废旧商品类别：</td>
+                    <td>
+                        <select class="upfile" style="width:200px" name="KS_类别">
+                            <option value="废报纸">废报纸</option>
+                            <option value="废书本">废书本</option>
+                            <option value="废纸板">废纸板</option>
+                            <option value="玻璃瓶">玻璃瓶</option>
+                            <option value="饮料瓶">饮料瓶</option>
+                            <option value="饮料瓶（个）">饮料瓶（个）</option>
+                            <option value="杂塑料">杂塑料</option>
+                            <option value="旧服装">旧服装</option>
+                            <option value="废铁">废铁</option>
+                            <option value="铝易拉罐">铝易拉罐</option>
+                            <option value="铁易拉罐">铁易拉罐</option>
+                            <option value="废手机">废手机</option>
+                            <option value="笔记本电脑">笔记本电脑</option>
+                            <option value="电脑主机">电脑主机</option>
+                            <option value="CRT显示器">CRT显示器</option>
+                            <option value="液晶显示器">液晶显示器</option>
+                            <option value="电子板卡">电子板卡</option>
+                            <option value="其他">其他</option>
+                            <option value="混装">混装</option>
+                            <option value="旧鞋">旧鞋</option>
+                            <option value="厨余">厨余</option>
+                            <option value="有害">有害</option>
+
+                        </select>
+                        <font color="red"> * </font> <span style="margin-top:5px">如有多种商品类别可在备注中填写</span>
+                    </td>
+                </tr>
+                <tr class="tdbg">
+                    <td class="lefttdbg">数量：</td>
+                    <td><input type="text" class="upfile" style="width:200px" name="KS_数量" value="">
+                        <font color="red"> * </font> <span style="margin-top:5px">请注明单位：如10斤，5个等</span>
+                    </td>
+                </tr>
+                <tr class="tdbg">
+                    <td class="lefttdbg">预约上门时间：</td>
+                    <td><select class="upfile" style="width:200px" name="KS_上门时间">
+                            <option value="星期一">星期一</option>
+                            <option value="星期二">星期二</option>
+                            <option value="星期三">星期三</option>
+                            <option value="星期四">星期四</option>
+                            <option value="星期五">星期五</option>
+                            <option value="星期六">星期六</option>
+                            <option value="星期日">星期日</option>
+                        </select>
+                        <font color="red"> * </font>
+                    </td>
+                </tr>
+                <tr class="tdbg">
+                    <td class="lefttdbg">上门时间段：</td>
+                    <td><input type="radio" name="KS_上门时间段" value="上午">上午<input type="radio" name="KS_上门时间段"
+                            value="下午">下午<input type="radio" name="KS_上门时间段" value="全天">全天<font color="red"> * </font>
+                    </td>
+                </tr>
+                <tr class="tdbg">
+                    <td class="lefttdbg">详细地址：</td>
+                    <td><input type="text" class="upfile" style="width:400px" name="KS_详细地址" value="">
+                        <font color="red"> * </font> <span style="margin-top:5px">请精确到室</span>
+                    </td>
+                </tr>
+                <tr class="tdbg">
+                    <td class="lefttdbg">备注：</td>
+                    <td><textarea style="width:400px;height:150px" rows="5" name="KS_备注"></textarea> </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="subtdbg" ><input type="submit" value="确认提交" name="submit1"
+                            style=" width:80px; margin-left:136px;"></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block scriptBlock %}
+<script type="text/javascript">
+    $(function () {
+        $($(".menu li")[3]).addClass("active")
+    })
+</script>
+{% endblock %}

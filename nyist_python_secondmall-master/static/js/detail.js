@@ -77,7 +77,7 @@ $(function () {
                             "\n" +
                             "                                     <ul class=\" all_comment_in small_comment\"></ul>\n" +
                             "\n" +
-                            "                                     <textarea class=\"form-control real_comment1\" rows=\"3\" placeholder=\"回复的语言有不合法或者不符合南工二手交易平台规定，会被删除并且你的账号可能会被查封~\"></textarea>\n" +
+                            "                                     <textarea class=\"form-control real_comment1\" rows=\"3\" placeholder=\"回复的语言有不合法或者不符合72便二手交易平台规定，会被删除并且你的账号可能会被查封~\"></textarea>\n" +
                             "                                     <button type=\"button\" cid = \""+result.id+"\" class=\"btn btn-default comment_send_small\" data-toggle=\"button\" aria-pressed=\"false\" autocomplete=\"off\">回复</button>\n" +
                             "\n" +
                             "                                 </div>\n" +
