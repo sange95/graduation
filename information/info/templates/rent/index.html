@@ -173,9 +173,10 @@
             <a class="logo-site">租房</a>
         </div>
         <div class="search-form">
-            <form action="/rent/index" method="post" id="search">
+            <form action="/rent/sort" method="post" id="search">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input id="but-search" type="button" name="搜索" onclick="formSubmit()" value="搜索">
-                <input type="text" id="text-search" placeholder="请输入小区名称、地址...">   
+                <input type="text" id="text-search" placeholder="请输入小区名称、地址..." name="tiaojian">
             </form>
         </div>
     </div>
@@ -249,7 +250,7 @@
                 <ul>
                     <div class="data">
                         <div class="rent-img">
-                            <a href="/rent/detail/{{ info["_id"] }}"><img src="{{ info["image_url"][0][:5] + ":" + info["image_url"][0][5:] }}" alt=""></a>
+                            <a href="/rent/detail/?house_id={{ info["_id"] }}"><img src="../../static/imgs/rent/486ea1f2-5d9e-11e9-9bf0-000c29019f85.jpg" alt=""></a>
                         </div>
                         <div class="rent-info">
                             <a href = "/rent/detail?house_id={{ info['_id'] }}"><h5 class="rent-title">{{ info["title"][0] }}</h5></a>
@@ -304,7 +305,7 @@
             $(this).removeClass("check")
         })
     })
-    // 手动表单提   交
+    // 手动表单提交
     function formSubmit() {
         if (!$(".area .item-elems .all").hasClass("check")) {
             let filerList = []
