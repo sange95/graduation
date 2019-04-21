@@ -67,20 +67,22 @@
     }
 
     .row-img {
-        /* float: left; */
         display: inline-block;
         margin: 0px 5px 0px 5px;
+        width: 109px;
+        height: 75px
     }
 
     .row-img img {
         width: 98%;
+        height: 75px
     }
 
     .move {
         display: inline-block;
         height: 75px;
         width: 25px;
-        background-color: lightslategrey;
+        background-color: #1CB0F6;
     }
 
     #imglist {
@@ -90,11 +92,11 @@
         margin-top: 15px;
     }
 
-    .move a {
+    .move{
         display: block;
         font-size: 30px;
         text-align: center;
-        margin-top: 12px;
+        padding-top: 12px;
         margin-bottom: auto;
     }
 
@@ -162,6 +164,19 @@
         margin: 20px 0px 20px 0px;
         display: flex;
     }
+    .move:hover {
+        cursor: pointer;
+    }
+    .imgcheck img {
+        border: #1CB0F6 solid 2px;
+        /* border: cornsilk solid 2px; */
+    }
+    .center ul li:hover {
+        cursor: pointer;
+    }
+    .contact {
+        padding-top: 10px;
+    }
 </style>
 {% endblock %}
 {% block contentBlock %}
@@ -185,16 +200,16 @@
                 <img src="../../static/imgs/house3.jpg" alt="">
             </div>
             <div id="imglist">
-                <div class="left move "><a>
-                        <</a> </div> <div class="center">
-                            <ul>
-                                <li class="row-img"><img src="../../static/imgs/house.jpg"></li>
-                                <li class="row-img"><img src="../../static/imgs/house.jpg"></li>
-                                <li class="row-img"><img src="../../static/imgs/house.jpg"></li>
-                                <li class="row-img"><img src="../../static/imgs/house.jpg"></li>
-                            </ul>
+                <div class="left move"><</div> 
+                <div class="center">
+                    <ul>
+                        <li class="row-img imgcheck"><img src="../../static/imgs/house3.jpg"></li>
+                        <li class="row-img"><img src="../../static/imgs/new2.jpg"></li>
+                        <li class="row-img"><img src="../../static/imgs/house3.jpg"></li>
+                        <li class="row-img"><img src="../../static/imgs/house3.jpg"></li>
+                    </ul>
                 </div>
-                <div class="right move"><a>></a></div>
+                <div class="right move">></div>
             </div>
         </div>
         <div id="house-describe">
@@ -259,4 +274,34 @@
         </li>
     </ul>
 </div>
+{% endblock %}
+
+{% block scriptBlock %}
+<script type="text/javascript">
+    $("#bigimg img").attr("src", $(".imgcheck").attr("src"))
+    // 切换图片
+    $(".move").click(function() {
+        var that = $(".imgcheck")
+        if ($(this).hasClass("right")) {
+            if ($(".center ul li").index(that[0]) != 3) {
+                that.next().addClass("imgcheck")
+                that.removeClass("imgcheck")
+                $("#bigimg img").attr("src", $(".imgcheck img").attr("src"))
+            }
+            
+        } else {
+            if ($(".center ul li").index(that[0]) != 0) {
+                that.prev().addClass("imgcheck")
+                that.removeClass("imgcheck")
+                $("#bigimg img").attr("src", $(".imgcheck img").attr("src"))
+            }
+        }
+    })
+    // 点击图片事件
+    $(".center ul li").click(function() {
+        $(".imgcheck").removeClass("imgcheck")
+        $(this).addClass("imgcheck")
+        $("#bigimg img").attr("src", $(".imgcheck img").attr("src"))
+    })
+</script>
 {% endblock %}

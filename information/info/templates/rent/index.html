@@ -170,6 +170,11 @@
     #navigation {
         text-align: center;
     }
+    .rent-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 </style>
 {% endblock %}
 {% block contentBlock %}
@@ -182,7 +187,7 @@
         <div class="search-form">
             <form action="" method="post" id="search">
                 <input id="but-search" type="button" name="搜索" onclick="searchAction()" value="搜索">
-                <input type="text" id="text-search" placeholder="请输入小区名称、地址...">   
+                <input type="text" id="text-search" placeholder="请输入小区名称、地址..." name="tiaojian">
             </form>
         </div>
     </div>
@@ -256,12 +261,12 @@
                 <ul class="dataUl">
                     <div class="data">
                         <div class="rent-img">
-                            <a href='/rent/detail/{{ info["_id"]}}'><img src='{{ info["image_url"][0][:5]}}' alt=""></a>
+                            <a href='/rent/detail?house_id={{ info["_id"] }}'><img src="../../static/imgs/rent/486ea1f2-5d9e-11e9-9bf0-000c29019f85.jpg" alt=""></a>
                         </div>
                         <div class="rent-info">
-                            <a href = '/rent/detail/{{ info["_id"]}}'><h5 class="rent-title">{{ info["title"][0] }}</h5></a>
+                            <a href = '/rent/detail?house_id={{ info["_id"]}}'><h5 class="rent-title">{{ info["title"] | first }}</h5></a>
                             <p class="rent-detail">{{ info["huxing"] }}<span>|</span>{{ info["jianzumianji"] }}<span>|</span>{{ info["loucheng"] }}/{{ info["zongloucheng"] }}<span>|</span>{{ info['chuzufangshi'] }}</p>
-                            <p class="rent-adress">{{ info["xiaoqu_name"][0] }}&nbsp;&nbsp;{{ info["dizhi"] }}</p>
+                            <p class="rent-adress">{{ info["xioqu_name"] | first }}&nbsp;&nbsp;{{ info["dizhi"] }}</p>
                         </div>
                         <div class="rent-price">{{ info["money"] }}<strong>元/月</strong></div>
                     </div>
@@ -396,30 +401,41 @@
             url: "/rent/sort" ,//url
             data: {filter:$('#search').serializeArray(), curPage:curPage, pageSize:pageSize},
             success: function (result) {
-                console.log("jjjjjjjjjjj")
-                console.log(result);//打印服务端返回的数据(调试用)
-                if (result.resultCode == 200) {
-                    alert("SUCCESS");
-                }
-                // 清除元素
                 $("#listdiv .dataUl").remove()
-
-                // 添加元素
-                $("#listdiv").append("data")
+                var info = result.data.info
+                var template = ""
+                for (var val in info) {
+                    let address = ""
+                    if (info[val].xiaoqu_name) {
+                        address = (info[val].xiaoqu_name)["0"]
+                    }
+                    template = template + `<ul class="dataUl">
+                    <div class="data">
+                        <div class="rent-img">
+                            <a href='/rent/detail?house_id=${info[val]._id}'><img src="../../static/imgs/rent/486ea1f2-5d9e-11e9-9bf0-000c29019f85.jpg" alt=""></a>
+                        </div>
+                        <div class="rent-info">
+                            <a href = '/rent/detail?house_id=${info[val]._id}'><h5 class="rent-title">${info[val].title}</h5></a>
+                            <p class="rent-detail">${info[val].huxing}<span>|</span>${info[val].jianzumianji}<span>|</span>${info[val].loucheng}/${info[val].zongloucheng}<span>|</span>${info[val].chuzufangshi}</p>
+                            <p class="rent-adress">${address}&nbsp;&nbsp;${info[val].dizhi}</p>
+                        </div>
+                        <div class="rent-price">${info[val].money}<strong>元/月</strong></div>
+                    </div>
+                </ul>`
+                }
+                $("#listdiv").prepend(template)
             },
             error : function(e) {
-                console.log("hhhhhhh")
                 console.log(e)
-                // alert("异常！",e);
             }
         });
     }
 
     // 分页插件
     pageUtil.initPage('page',{
-		totalCount:500,//总页数，一般从回调函数中获取。如果没有数据则默认为1页
+		totalCount:100,//总页数，一般从回调函数中获取。如果没有数据则默认为1页
         curPage:1,//初始化时的默认选中页，默认第一页。如果所填范围溢出或者非数字或者数字字符串，则默认第一页
-        showCount:9,//分页栏显示的数量
+        showCount:5,//分页栏显示的数量
         pageSizeList:[5,10,15,20,25,30],//自定义分页数，默认[5,10,15,20,50]
         defaultPageSize:10,//默认选中的分页数,默认选中第一个。如果未匹配到数组或者默认数组中，则也为第一个
         isJump:true,//是否包含跳转功能，默认false

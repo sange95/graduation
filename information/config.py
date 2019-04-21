@@ -15,7 +15,6 @@ class Config(object):
     # 在请求结束的时候，如果指定此配置为True，那么SQLAlchemy会自动执行一次db.session.commit()操作
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
-
     # Redis的配置
     REDIS_HOST = '47.99.62.36'
     REDIS_PORT = 6379
@@ -28,16 +27,15 @@ class Config(object):
     # 设置需要过期
     SESSION_PERMANENT = False
     # 设置过期时间
-    PERMANENT_SESSION_LIFETIME = 86400*2
+    PERMANENT_SESSION_LIFETIME = 86400 * 2
 
     # 设置日志等级
     LOG_LEVEL = logging.DEBUG
     # mongodb的配置
     MONGODB_HOST = "47.99.62.36"
     MONGODB_PORT = 27017
-    MONGODB_NAME = 'sun'
-    MONGODB_SET = 'sun'
-
+    MONGODB_NAME = 'sl'
+    MONGODB_SET = 'sl'
 
 
 class DevelopmentConfig(Config):

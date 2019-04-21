@@ -472,7 +472,7 @@ if(typeof layui ==='undefined' && typeof layer ==='undefined'){
 	}
 	
 	function createLink(str){
-		return "<a href='#'>" + str + "</a>";
+		return "<a>" + str + "</a>";
 	}
 	
 	function disable(arr){
