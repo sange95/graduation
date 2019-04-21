@@ -54,7 +54,7 @@ def create_app(config_name):
     # CSRF帮我们做了： cookie取出随机值，表单中取出随机值，进行校验，返回响应结果
     # 没有帮我们做：1，在界面加载的时候，网cookie中添加有一个csrf_token,并且在表单中添加个隐藏的csrf_token
     # 我们用的ajax，所以我们在请求的时候带上这个csrf的值
-    CSRFProtect(app)
+    # CSRFProtect(app)
     # 设置将session保存的位置的扩展包
     Session(app)
 

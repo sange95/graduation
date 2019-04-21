@@ -2,6 +2,7 @@ import random
 import re
 from pprint import pprint
 import gevent
+import time
 from gevent import monkey
 
 import requests
@@ -11,10 +12,13 @@ import uuid
 from pymongo import MongoClient
 
 from config import HOST, POST, DBNAME, SETNAME
+
 monkey.patch_all()
+
 
 class fangtianxia:
     A = 1
+
     def __init__(self):
         self.start_url = "https://zz.zu.fang.com/"
         self.url_header = "https://zz.zu.fang.com"
@@ -29,6 +33,7 @@ class fangtianxia:
 
     def get_uuid(self):
         return uuid.uuid1()
+
     # def save_img(self, url_list):
     #     for url in url_list:
     #         resp = self.start(url).content.decode('utf8')
@@ -43,7 +48,10 @@ class fangtianxia:
         items["_id"] = self.get_uuid()
         # print(items["_id"])
         items["detail_url"] = self.url_header + detail_url
+        print(items["detail_url"])
         try:
+            time.sleep(random.random())
+            # print("正在爬取第{}条数据".format(self.A))
             resp = self.start1(items["detail_url"]).content.decode("gbk")
             html = etree.HTML(resp)
             items['title'] = html.xpath('//div[@class="tab-cont clearfix"]/h1/text()')
@@ -54,7 +62,8 @@ class fangtianxia:
             # 将图片保存在本地
             url_list = list()
             for url in img_url:
-                print(url)
+                # print(url)
+                # time.sleep(0.5)
                 resp = self.start(url)
                 # print(type(resp.content().decode("utf8")))
                 # print(resp)
@@ -65,8 +74,7 @@ class fangtianxia:
                     f.write(resp.content)
                 url_list.append("{}.jpg".format(self.get_uuid()))
 
-            items["image_url'"] = url_list
-
+            items["image_url"] = url_list
 
             # # print(items)
             items['money'] = html.xpath("//div[@class='trl-item sty1']/i/text()")[0]
@@ -78,12 +86,15 @@ class fangtianxia:
             # items["_id"] = items["local"]
             # div_list = html.xpath("//div[@class='tab-cont-right']/div[3]")
             items['chuzufangshi'] = \
-            html.xpath('//div[@class="tab-cont-right"]/div[3]/div[@class="trl-item1 w146"]/div[@class="tt"]/text()')[0]
+                html.xpath(
+                    '//div[@class="tab-cont-right"]/div[3]/div[@class="trl-item1 w146"]/div[@class="tt"]/text()')[0]
             items["huxing"] = html.xpath('//div[@class="tab-cont-right"]/div[3]/div[2]/div[@class="tt"]/text()')[0]
-            items["jianzumianji"] = html.xpath("//div[@class='tab-cont-right']/div[3]/div[3]/div[@class='tt']/text()")[0]
+            items["jianzumianji"] = html.xpath("//div[@class='tab-cont-right']/div[3]/div[3]/div[@class='tt']/text()")[
+                0]
             divs = html.xpath("//div[@class='tab-cont-right']/div[4]")[0]
             items["chaoxiang"] = divs.xpath("//div[@class='tab-cont-right']/div[4]/div[1]/div[@class='tt']/text()")[0]
-            items["zongloucheng"] = divs.xpath("//div[@class='tab-cont-right']/div[4]/div[2]/div[@class='font14']/text()")[
+            items["zongloucheng"] = \
+            divs.xpath("//div[@class='tab-cont-right']/div[4]/div[2]/div[@class='font14']/text()")[
                 0]
             items["loucheng"] = divs.xpath("//div[@class='tab-cont-right']/div[4]/div[2]/div[@class='tt']/text()")[0]
             items["zhuangxiu"] = divs.xpath("//div[@class='tab-cont-right']/div[4]/div[3]/div[@class='tt']/text()")[0]
@@ -104,16 +115,19 @@ class fangtianxia:
             # print(ret)
             items['phone'] = html.xpath("//div[@class='tjcont-list-cline2 tjcont_gs clearfix']/p/text()")[0]
             items['liulanrenshu'] = random.randint(500, 1500)
-            items['fangyuanliangdian'] = html.xpath("//li[@class='font14 fyld']/div[@class='fyms_con floatl gray3']//text()")
-            items['xiaoqujieshao'] = html.xpath("//li[@class='font14 xqjs']/div[@class='fyms_con floatl gray3']//text()")
-            items['zhoubianpeitao'] = html.xpath("//li[@class='font14 zbpt']/div[@class='fyms_con floatl gray3']//text()")
-            items['jioatongchuxing'] = html.xpath("//li[@class='font14 jtcx']/div[@class='fyms_con floatl gray3']//text()")
-
+            items['fangyuanliangdian'] = html.xpath(
+                "//li[@class='font14 fyld']/div[@class='fyms_con floatl gray3']//text()")
+            items['xiaoqujieshao'] = html.xpath(
+                "//li[@class='font14 xqjs']/div[@class='fyms_con floatl gray3']//text()")
+            items['zhoubianpeitao'] = html.xpath(
+                "//li[@class='font14 zbpt']/div[@class='fyms_con floatl gray3']//text()")
+            items['jioatongchuxing'] = html.xpath(
+                "//li[@class='font14 jtcx']/div[@class='fyms_con floatl gray3']//text()")
+            # self.A += 1
         except:
+            # print(self.A)
+            # self.A += 1
             pass
-
-
-
 
         # pprint(items)
         # pprint(items)
@@ -131,35 +145,45 @@ class fangtianxia:
     def get_detail(self, local_list):
         # print(local_list)
         for local in local_list:
-            print(local["local"])
+            # print(local["local"])
             # 保存每个大区,房子详情url
             # print(local)
-            info_list = list()
+            # info_list = list()
             url = local["local_url"]
-            resp = self.start(url).content.decode("gbk")
-            html = etree.HTML(resp)
-            detail_list = html.xpath("//div[@class='houseList']/dl[@class='list hiddenMap rel']//dd[@class='info rel']/p[1]/a/@href")
-            # print(etree.tostring(dl_list).decode())
-            for detail_url in detail_list[:10]:
-                # self.A += 1
-                # print(self.A)
-                gevent.joinall([
-                    gevent.spawn(self.get_infos, (detail_url, local)),
-                    gevent.spawn(self.get_infos, (detail_url, local))
-                ])
-
-
-
-
+            try:
+                resp = self.start(url).content.decode("gbk")
+                html = etree.HTML(resp)
+                detail_list = html.xpath(
+                    "//div[@class='houseList']/dl[@class='list hiddenMap rel']//dd[@class='info rel']/p[1]/a/@href")
+                # print(etree.tostring(dl_list).decode())
+                url_list = list()
+                for detail_url in detail_list:
+                    url_list.append(detail_url)
+                    if len(url_list) == 3:
+                        # self.A += 1
+                        # print(self.A)
+                        gevent.joinall([
+                            gevent.spawn(self.get_infos, (url_list[0], local)),
+                            gevent.spawn(self.get_infos, (url_list[1], local)),
+                            gevent.spawn(self.get_infos, (url_list[2], local))
+                        ])
+                        url_list = []
+            except:
+                pass
 
     def start1(self, url):
-        resp = requests.get(url=url, headers=self.headers1)
-        return resp
-
+        try:
+            resp = requests.get(url=url, headers=self.headers1, timeout=3)
+            return resp
+        except:
+            pass
 
     def start(self, url):
-        resp = requests.get(url=url, headers=self.headers)
-        return resp
+        try:
+            resp = requests.get(url=url, headers=self.headers, timeout=3)
+            return resp
+        except:
+            pass
 
     def get_info(self, resp):
         # 存放所有的地区和url
@@ -175,7 +199,6 @@ class fangtianxia:
             alist.append(items)
         return alist
 
-
     # 启动项
     def run(self):
         # 请求郑州区域的url
@@ -185,9 +208,6 @@ class fangtianxia:
         local_list = self.get_info(resp.content.decode("gbk"))
         # 获取区域内租房信息
         self.get_detail(local_list)
-
-
-
 
 
 if __name__ == '__main__':

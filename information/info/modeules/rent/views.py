@@ -18,7 +18,7 @@ def detail():
     详情页
     :return:
     """
-    house_id = request.args.get("house_id",None)
+    house_id = request.args.get("house_id", None)
     print(house_id)
     # house_id = json.loads(house_id)
     # print(house_id)
@@ -41,7 +41,7 @@ def detail():
         }
         return render_template("rent/detail.html", data=data)
     else:
-        data={
+        data = {
             "user": user
         }
         return render_template('news/404.html', data=data)
@@ -82,13 +82,15 @@ def index():
         if j == 6:
             break
     # print(a_list)
+    print(a_list[1]["xiaoqu_name"])
     data = {
         "user": user,
         "info": a_list
     }
     # return jsonify(data)
     # print(data)
-    print(len(data["info"]))
+    # print(len(data["info"]))
+    # pprint(data)
     return render_template("rent/index.html", data=data)
 
 
@@ -117,6 +119,7 @@ def sort():
     # 这个字符串
     # 字符串
     page = request.form.get("page", 1)
+    print(page)
     xiaoquname = request.form.get("tiaojian", None)
     # print(json.loads(xiaoquname))
     # 这下边的都是json
@@ -157,57 +160,63 @@ def sort():
                 # print(str)
                 # str = re.compile(".*3室.*")
                 # print(str)
-                a_lists = collection.find({"local": {"$in": local}, "huxing": {"$regex": str}, "chuzufangshi": chuzufangshi}).skip((page-1)*5).limit(5)
+                a_lists = collection.find(
+                    {"local": {"$in": local}, "huxing": {"$regex": str}, "chuzufangshi": chuzufangshi}).skip(
+                    (page - 1) * 5).limit(5)
             else:
 
-                str = re.compile( (r'.*[5-9]{1}室.*'))
-                a_lists = collection.find({"local": {"$in": local}, "huxing": {"$regex": str}, "chuzufangshi": chuzufangshi}).skip((page-1)*5).limit(5)
-            # a_lists = collection.find({"local":{"$in":local},"huxing": {"$regex":".*?"+huxing+".*?"}, "chuzufangshi": chuzufangshi})
+                str = re.compile((r'.*[5-9]{1}室.*'))
+                a_lists = collection.find(
+                    {"local": {"$in": local}, "huxing": {"$regex": str}, "chuzufangshi": chuzufangshi}).skip(
+                    (page - 1) * 5).limit(5)
+                # a_lists = collection.find({"local":{"$in":local},"huxing": {"$regex":".*?"+huxing+".*?"}, "chuzufangshi": chuzufangshi})
 
         else:
-            a_lists = collection.find({"local":{"$in": local}, "chuzufangshi": chuzufangshi}).skip((page-1)*5).limit(5)
+            a_lists = collection.find({"local": {"$in": local}, "chuzufangshi": chuzufangshi}).skip(
+                (page - 1) * 5).limit(5)
 
         for i in a_lists:
             info_list.append(i)
     else:
-       if huxing:
-           huxing = json.loads(huxing)[0]
-           print(huxing)
-           if huxing == '一室':
-               huxing = '1室'
-           elif huxing == '二室':
-               huxing = '2室'
-           elif huxing == '三室':
-               # print(111)
-               huxing = '3室'
-           elif huxing == '四室':
-               huxing = '4室'
-           else:
-               huxing = '10室'
-           if huxing != '10室':
-               # print(huxing)
-               r = ".*{}.*".format(huxing)
-               # print(r)
-               str = re.compile(r)
-               # print(str)
-               # str = re.compile(".*3室.*")
-               # print(str)
-               a_lists = collection.find(
-                   {"local": {"$in": local}, "huxing": {"$regex": str}}).skip((page-1)*5).limit(5)
-           else:
-               str = re.compile((r'.*[5-9]{1}室.*'))
-               a_lists = collection.find(
-                   {"local": {"$in": local}, "huxing": {"$regex": str}}).skip((page-1)*5).limit(5)
+        if huxing:
+            huxing = json.loads(huxing)[0]
+            print(huxing)
+            if huxing == '一室':
+                huxing = '1室'
+            elif huxing == '二室':
+                huxing = '2室'
+            elif huxing == '三室':
+                # print(111)
+                huxing = '3室'
+            elif huxing == '四室':
+                huxing = '4室'
+            else:
+                huxing = '10室'
+            if huxing != '10室':
+                # print(huxing)
+                r = ".*{}.*".format(huxing)
+                # print(r)
+                str = re.compile(r)
+                # print(str)
+                # str = re.compile(".*3室.*")
+                # print(str)
+                a_lists = collection.find(
+                    {"local": {"$in": local}, "huxing": {"$regex": str}}).skip((page - 1) * 5).limit(5)
+            else:
+                str = re.compile((r'.*[5-9]{1}室.*'))
+                a_lists = collection.find(
+                    {"local": {"$in": local}, "huxing": {"$regex": str}}).skip((page - 1) * 5).limit(5)
 
-       else:
-           a_lists = collection.find({"local": {"$in": local}}).skip((page-1)*5).limit(5)
+        else:
+            a_lists = collection.find({"local": {"$in": local}}).skip((page - 1) * 5).limit(5)
 
-       for i in a_lists:
-           info_list.append(i)
+        for i in a_lists:
+            info_list.append(i)
 
     data = {
         # "user": user,
         "info": info_list
     }
-     # return jsonify(data)
+    pprint(data)
+    # return jsonify(data)
     return jsonify(data=data)

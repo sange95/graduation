@@ -174,7 +174,7 @@
         </div>
         <div class="search-form">
             <form action="/rent/sort" method="post" id="search">
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="csrf_token">
                 <input id="but-search" type="button" name="搜索" onclick="formSubmit()" value="搜索">
                 <input type="text" id="text-search" placeholder="请输入小区名称、地址..." name="tiaojian">
             </form>
@@ -250,12 +250,12 @@
                 <ul>
                     <div class="data">
                         <div class="rent-img">
-                            <a href="/rent/detail/?house_id={{ info["_id"] }}"><img src="../../static/imgs/rent/486ea1f2-5d9e-11e9-9bf0-000c29019f85.jpg" alt=""></a>
+                            <a href="/rent/detail/?house_id={{ info['_id'] }}"><img src="../../static/imgs/rent/486ea1f2-5d9e-11e9-9bf0-000c29019f85.jpg" alt=""></a>
                         </div>
                         <div class="rent-info">
                             <a href = "/rent/detail?house_id={{ info['_id'] }}"><h5 class="rent-title">{{ info["title"][0] }}</h5></a>
                             <p class="rent-detail">{{ info["huxing"] }}<span>|</span>{{ info["jianzumianji"] }}<span>|</span>{{ info["loucheng"] }}/{{ info["zongloucheng"] }}<span>|</span>{{ info['chuzufangshi'] }}</p>
-                            <p class="rent-adress">{{ info["xiaoqu_name"][0] }}&nbsp;&nbsp;{{ info["dizhi"] }}</p>
+                            <p class="rent-adress">{{ info["xiaoqu_name"] |  first }}&nbsp;&nbsp;{{ info["dizhi"] }}</p>
                         </div>
                         <div class="rent-price">{{ info["money"] }}<strong>元/月</strong></div>
                     </div>
