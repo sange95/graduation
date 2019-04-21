@@ -2,6 +2,9 @@
 {% block titleBlock %}
 72Bian/租房查询
 {% endblock %}
+{% block head %}
+<script type="text/javascript" src="../../static/js/initPage.js"></script>
+{% endblock %}
 {% block cssBlock %}
 <style>
     .main {
@@ -163,6 +166,15 @@
         font-size: 25px;
         color: red;
     }
+
+    #navigation {
+        text-align: center;
+    }
+    .rent-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 </style>
 {% endblock %}
 {% block contentBlock %}
@@ -173,9 +185,8 @@
             <a class="logo-site">租房</a>
         </div>
         <div class="search-form">
-            <form action="/rent/sort" method="post" id="search">
-                <input type="hidden" name="csrf_token">
-                <input id="but-search" type="button" name="搜索" onclick="formSubmit()" value="搜索">
+            <form action="" method="post" id="search">
+                <input id="but-search" type="button" name="搜索" onclick="searchAction()" value="搜索">
                 <input type="text" id="text-search" placeholder="请输入小区名称、地址..." name="tiaojian">
             </form>
         </div>
@@ -247,21 +258,23 @@
         </div>
         <div id="listdiv">
             {% for info in data["info"] %}
-                <ul>
+                <ul class="dataUl">
                     <div class="data">
                         <div class="rent-img">
-                            <a href="/rent/detail/?house_id={{ info['_id'] }}"><img src="../../static/imgs/rent/486ea1f2-5d9e-11e9-9bf0-000c29019f85.jpg" alt=""></a>
+                            <a href='/rent/detail?house_id={{ info["_id"] }}'><img src="../../static/imgs/rent/486ea1f2-5d9e-11e9-9bf0-000c29019f85.jpg" alt=""></a>
                         </div>
                         <div class="rent-info">
-                            <a href = "/rent/detail?house_id={{ info['_id'] }}"><h5 class="rent-title">{{ info["title"][0] }}</h5></a>
+                            <a href = '/rent/detail?house_id={{ info["_id"]}}'><h5 class="rent-title">{{ info["title"] | first }}</h5></a>
                             <p class="rent-detail">{{ info["huxing"] }}<span>|</span>{{ info["jianzumianji"] }}<span>|</span>{{ info["loucheng"] }}/{{ info["zongloucheng"] }}<span>|</span>{{ info['chuzufangshi'] }}</p>
-                            <p class="rent-adress">{{ info["xiaoqu_name"] |  first }}&nbsp;&nbsp;{{ info["dizhi"] }}</p>
+                            <p class="rent-adress">{{ info["xioqu_name"] | first }}&nbsp;&nbsp;{{ info["dizhi"] }}</p>
                         </div>
                         <div class="rent-price">{{ info["money"] }}<strong>元/月</strong></div>
                     </div>
                 </ul>
             {% endfor %}
-            <div id="navigation"></div>
+            <div id="navigation">
+                <div id='page'></div>
+            </div>
         </div>
     </div>
 </div>
@@ -298,12 +311,14 @@
             $(this).addClass("check")
             $(this).siblings(".all").removeClass("check")
         }
+        searchAction()
     })
     $(".item-elems .all").click(function() {
         $(this).addClass("check")
         $(this).siblings().each(function() {
             $(this).removeClass("check")
         })
+        searchAction()
     })
     // 手动表单提交
     function formSubmit() {
@@ -371,7 +386,66 @@
                 $("#search")[0].appendChild(input)
             }
         }
-        $("#search").submit();
     }
+
+    function searchAction() {
+        formSubmit()
+        Ajax(1, 10)
+    }
+
+    function Ajax(curPage,pageSize) {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/rent/sort" ,//url
+            data: {filter:$('#search').serializeArray(), curPage:curPage, pageSize:pageSize},
+            success: function (result) {
+                $("#listdiv .dataUl").remove()
+                var info = result.data.info
+                var template = ""
+                for (var val in info) {
+                    let address = ""
+                    if (info[val].xiaoqu_name) {
+                        address = (info[val].xiaoqu_name)["0"]
+                    }
+                    template = template + `<ul class="dataUl">
+                    <div class="data">
+                        <div class="rent-img">
+                            <a href='/rent/detail?house_id=${info[val]._id}'><img src="../../static/imgs/rent/486ea1f2-5d9e-11e9-9bf0-000c29019f85.jpg" alt=""></a>
+                        </div>
+                        <div class="rent-info">
+                            <a href = '/rent/detail?house_id=${info[val]._id}'><h5 class="rent-title">${info[val].title}</h5></a>
+                            <p class="rent-detail">${info[val].huxing}<span>|</span>${info[val].jianzumianji}<span>|</span>${info[val].loucheng}/${info[val].zongloucheng}<span>|</span>${info[val].chuzufangshi}</p>
+                            <p class="rent-adress">${address}&nbsp;&nbsp;${info[val].dizhi}</p>
+                        </div>
+                        <div class="rent-price">${info[val].money}<strong>元/月</strong></div>
+                    </div>
+                </ul>`
+                }
+                $("#listdiv").prepend(template)
+            },
+            error : function(e) {
+                console.log(e)
+            }
+        });
+    }
+
+    // 分页插件
+    pageUtil.initPage('page',{
+		totalCount:100,//总页数，一般从回调函数中获取。如果没有数据则默认为1页
+        curPage:1,//初始化时的默认选中页，默认第一页。如果所填范围溢出或者非数字或者数字字符串，则默认第一页
+        showCount:5,//分页栏显示的数量
+        pageSizeList:[5,10,15,20,25,30],//自定义分页数，默认[5,10,15,20,50]
+        defaultPageSize:10,//默认选中的分页数,默认选中第一个。如果未匹配到数组或者默认数组中，则也为第一个
+        isJump:true,//是否包含跳转功能，默认false
+        isPageNum:true,//是否显示分页下拉选择，默认false
+        isPN:true,//是否显示上一页和下一面，默认true
+        isFL:true,//是否显示首页和末页，默认true
+        jump:function(curPage,pageSize){//跳转功能回调，传递回来2个参数，当前页和每页大小。如果没有设置分页下拉，则第二个参数永远为0。这里的this被指定为一个空对象，如果回调中需用到this请自行使用bind方法
+            formSubmit()
+            Ajax(curPage, pageSize)
+        },
+    });
 </script>
 {% endblock %}

@@ -10,7 +10,7 @@ from flask import render_template, session, current_app, g, request, jsonify, ab
 
 
 @rent_bul.route("/detail", methods=["get"])
-@user_login_data
+# @user_login_data
 def detail():
     # print("ccccccccccccc")
     # data = "ccc"
@@ -22,29 +22,33 @@ def detail():
     print(house_id)
     # house_id = json.loads(house_id)
     # print(house_id)
-    user_id = session.get('user_id', None)
+    # user_id = session.get('user_id', None)
 
-    user = None
-    if user_id:
-        try:
-            user = User.query.get(user_id)
-            # print(user)
-        except Exception as e:
-            current_app.logger.error(e)
-    user = g.user
+
+    # user = None
+    # if user_id:
+    #     try:
+    #         user = User.query.get(user_id)
+    #         # print(user)
+    #     except Exception as e:
+    #         current_app.logger.error(e)
+    # user = g.user
     if house_id:
         info = collection.find_one({"_id": house_id})
         print(info)
         data = {
-            "user": user,
+            # "user": user,
             "info": info
         }
         return render_template("rent/detail.html", data=data)
     else:
-        data = {
-            "user": user
-        }
-        return render_template('news/404.html', data=data)
+
+        # data = {
+        #     "user": user
+        # }
+
+        # return render_template('news/404.html', data=data)
+        return render_template('news/404.html')
 
 
 @rent_bul.route("/index", methods=["get"])
@@ -89,8 +93,6 @@ def index():
     }
     # return jsonify(data)
     # print(data)
-    # print(len(data["info"]))
-    # pprint(data)
     return render_template("rent/index.html", data=data)
 
 
