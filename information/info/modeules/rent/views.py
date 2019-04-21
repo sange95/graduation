@@ -82,9 +82,75 @@ def index():
     # return jsonify(data)
     return render_template("rent/index.html", data=data)
 
+
+@rent_bul.route("/sort", methods=["POST"])
+# @user_login_data
+def sort():
+    print("ccccccccccccc")
+    # data = "ccc"
+    """
+    将数据库中的数据所有查询出来,返回前端
+    :return:
+    """
+    # user_id = session.get('user_id', None)
+    # user = None
+    # if user_id:
+    #     try:
+    #         user = User.query.get(user_id)
+    #         # print(user)
+    #     except Exception as e:
+    #         current_app.logger.error(e)
+    # user = g.user
+    # local = request.args.get("local", None)
+    # if local:
+    #     data = collection.find({"local": local})
+    # else:
+    local = request.args.get("local", None)
+    print(local)
+    print(type(local))
+    if local:
+
+        data = collection.find({"local": local})
+        j = 1
+        # print(5555)
+        # 放置所有的房子信息
+        a_list = list()
+        for i in data:
+            j += 1
+            # pprint(i)
+            a_list.append(i)
+
+            if j == 6:
+                break
+        # print(a_list)
+        data = {
+            # "user": user,
+            "info": a_list
+        }
+        # return jsonify(data)
+        return jsonify(data=data)
+    else:
+        abort(404)
 #
 # @rent_bul.route("/detail", methods=["get"])
 # def detail():
 #     print("这是租房的详情页")
 #     data = "ccc"
 #     return render_template("rent/detail.html", data=data)
+
+# @rent_bul.route("/detail", methods=["get"])
+# @user_login_data
+# def detail():
+#     user_id = session.get('user_id', None)
+#     user = None
+#     if user_id:
+#         try:
+#             user = User.query.get(user_id)
+#             # print(user)
+#         except Exception as e:
+#             current_app.logger.error(e)
+#     user = g.user
+#     data = {
+#         "user": user,
+#     }
+#     return render_template('rent/detail.html', data=data)

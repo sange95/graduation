@@ -7,80 +7,97 @@
     .main {
         width: 70%;
     }
+
     .logobian {
         font-size: 40px;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
+
     #detail-header {
-        width: 100%;    
+        width: 100%;
         display: flex;
     }
+
     #detail-title {
         width: 70%;
         min-width: 500px;
         display: inline-block;
     }
+
     #wx-qr {
         width: 30%;
         min-width: 200px;
         display: inline-block;
         padding-left: 30px;
     }
-    .logobian{
+
+    .logobian {
         color: #1CB0F6;
         font-style: italic;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     }
+
     .location-look {
         font-size: 13px;
         color: gray;
     }
+
     #wx-qr img {
         width: 160px;
     }
+
     #wx-qr div {
         padding: 10px 0px 0px 25px;
     }
+
     #bigimg img {
         width: 100%;
         height: 348px;
     }
+
     #house-imgs {
         width: 60%;
         display: inline-block;
     }
+
     #house-describe {
         width: 35%;
         display: inline-block;
         margin-left: 10px;
     }
+
     .row-img {
         /* float: left; */
         display: inline-block;
         margin: 0px 5px 0px 5px;
     }
+
     .row-img img {
         width: 98%;
     }
+
     .move {
         display: inline-block;
         height: 75px;
         width: 25px;
         background-color: lightslategrey;
     }
+
     #imglist {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         margin-top: 15px;
     }
-    .move a{
+
+    .move a {
         display: block;
         font-size: 30px;
         text-align: center;
         margin-top: 12px;
         margin-bottom: auto;
     }
+
     .center {
         min-width: 444px;
     }
@@ -88,20 +105,25 @@
     .price {
         font-size: 30px;
     }
+
     .item-key {
         color: gray;
     }
+
     #house-describe ul li {
         margin-top: 20px;
     }
+
     .human {
         display: inline-block;
         margin-right: 10px;
     }
+
     .human img {
         width: 50px;
         margin: 0px 0px 10px 10px;
     }
+
     .phone {
         float: right;
         display: inline-block;
@@ -114,31 +136,37 @@
         color: white;
         padding-top: 20px;
     }
+
     #apartment-title {
         padding-bottom: 20px;
         margin-top: 30px;
         font-size: 30px;
         border-bottom: lightgray solid 1px;
     }
+
     #apartment-des li div {
         display: inline-block;
     }
+
     #apartment-des li .title {
         width: 10%;
         font-size: 14px;
         color: gray;
     }
+
     #apartment-des li .text {
         width: 80%;
     }
+
     #apartment-des li {
         margin: 20px 0px 20px 0px;
+        display: flex;
     }
 </style>
 {% endblock %}
 {% block contentBlock %}
 
-<div class="container main"> 
+<div class="container main">
     <div id="detail-header">
         <div id="detail-title">
             <p class="logobian">72bian->租房</p>
@@ -157,27 +185,30 @@
                 <img src="../../static/imgs/house3.jpg" alt="">
             </div>
             <div id="imglist">
-                <div class="left move "><a><</a></div>
-                <div class="center">
-                    <ul>
-                        <li class="row-img"><img src="../../static/imgs/house.jpg"></li>
-                        <li class="row-img"><img src="../../static/imgs/house.jpg"></li>
-                        <li class="row-img"><img src="../../static/imgs/house.jpg"></li>
-                        <li class="row-img"><img src="../../static/imgs/house.jpg"></li>
-                    </ul>
+                <div class="left move "><a>
+                        <</a> </div> <div class="center">
+                            <ul>
+                                <li class="row-img"><img src="../../static/imgs/house.jpg"></li>
+                                <li class="row-img"><img src="../../static/imgs/house.jpg"></li>
+                                <li class="row-img"><img src="../../static/imgs/house.jpg"></li>
+                                <li class="row-img"><img src="../../static/imgs/house.jpg"></li>
+                            </ul>
                 </div>
                 <div class="right move"><a>></a></div>
             </div>
         </div>
         <div id="house-describe">
             <div class="des-price">
-                <a class="price" style="color: red;">2200<span>元/月&nbsp;&nbsp;</span></a><span class="pay-type">押一付三&nbsp;&nbsp;</span>
+                <a class="price" style="color: red;">2200<span>元/月&nbsp;&nbsp;</span></a><span
+                    class="pay-type">押一付三&nbsp;&nbsp;</span>
                 <a href="#">费用明细</a>
             </div>
             <ul>
                 <li><span class="item-key">租凭方式：&nbsp;&nbsp;</span><span class="item-val">整租</span></li>
-                <li><span class="item-key">房屋类型：&nbsp;&nbsp;</span><span class="item-val">1室1厅&nbsp;&nbsp;</span><span class="size">30</span><span>平</span></li>
-                <li><span class="item-key">朝向楼层：&nbsp;&nbsp;</span><span class="item-val">南&nbsp;&nbsp;</span><span class="floor">3/16</span></li>
+                <li><span class="item-key">房屋类型：&nbsp;&nbsp;</span><span class="item-val">1室1厅&nbsp;&nbsp;</span><span
+                        class="size">30</span><span>平</span></li>
+                <li><span class="item-key">朝向楼层：&nbsp;&nbsp;</span><span class="item-val">南&nbsp;&nbsp;</span><span
+                        class="floor">3/16</span></li>
                 <li><span class="item-key">所在小区：&nbsp;&nbsp;</span><span class="item-val">保利百合</span></li>
                 <li><span class="item-key">所属区域：&nbsp;&nbsp;</span><span class="item-val">中原区</span></li>
                 <li><span class="item-key">详情地址：&nbsp;&nbsp;</span><span class="item-val">中原区中原路146号</span></li>
@@ -207,25 +238,25 @@
                 由国泰房地产发展(郑州)有限公司开发。</div>
         </li>
         <li>
-                <div class="title">房源亮点</div>
-                <div class="text">房子在花园路北三环罗马假日小区汽配大世界沙门地铁口黄河建工居易摩根附近
-                        房间配置双人床，大衣柜，电脑桌椅，新空调，房间15-20平米左右
-                        房间干净卫生配置齐全，拎包即可入住，随时可以入住</div>
-            </li>
-            <li>
-                    <div class="title">周边配套</div>
-                    <div class="text">大学：河南大学郑州、省农业广播电视大学、郑州成人中专、省实验成人中等专业华北水利水电大学等
-                            中：郑州市七十六中、柳林、郑州十一中北校、郑州市七中、马李庄、世纪先锋、杨君刘等
-                            幼儿园：世纪先锋幼儿园、柳林幼儿园、天爱国际幼儿园、慧聪成艺术幼儿园、喜洋洋幼儿园等
-                            商场：家乐福、丹尼斯百货、世纪联华、中环百货、郑商生活超市、满亿100连锁便利店等
-                            邮局：北环路邮局、华北水院邮政所等
-                            银行：中国农业银行、工商银行、光大银行、兴业银行浦发银行平安银行交通银行建设银行等
-                            医院：新世纪动物医院、河南省中医院21世纪门诊部、金水肛泰医院、郑州德馨中医、河南</div>
-                </li>
-                <li>
-                        <div class="title">交通出行</div>
-                        <div class="text">乘坐62路、32路、K6路、90路、220路、94路、39路等，在汽配大世界站下车</div>
-                    </li>
+            <div class="title">房源亮点</div>
+            <div class="text">房子在花园路北三环罗马假日小区汽配大世界沙门地铁口黄河建工居易摩根附近
+                房间配置双人床，大衣柜，电脑桌椅，新空调，房间15-20平米左右
+                房间干净卫生配置齐全，拎包即可入住，随时可以入住</div>
+        </li>
+        <li>
+            <div class="title">周边配套</div>
+            <div class="text">大学：河南大学郑州、省农业广播电视大学、郑州成人中专、省实验成人中等专业华北水利水电大学等
+                中：郑州市七十六中、柳林、郑州十一中北校、郑州市七中、马李庄、世纪先锋、杨君刘等
+                幼儿园：世纪先锋幼儿园、柳林幼儿园、天爱国际幼儿园、慧聪成艺术幼儿园、喜洋洋幼儿园等
+                商场：家乐福、丹尼斯百货、世纪联华、中环百货、郑商生活超市、满亿100连锁便利店等
+                邮局：北环路邮局、华北水院邮政所等
+                银行：中国农业银行、工商银行、光大银行、兴业银行浦发银行平安银行交通银行建设银行等
+                医院：新世纪动物医院、河南省中医院21世纪门诊部、金水肛泰医院、郑州德馨中医、河南</div>
+        </li>
+        <li>
+            <div class="title">交通出行</div>
+            <div class="text">乘坐62路、32路、K6路、90路、220路、94路、39路等，在汽配大世界站下车</div>
+        </li>
     </ul>
 </div>
 {% endblock %}
