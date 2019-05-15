@@ -30,6 +30,7 @@ class loginUrl(views.MethodView):
                 if check_password_hash(user.password, password):
                     session["uid"] = user.id
                     if str(is_mt) == '0':
+                        print("登录成功")
                         return jsonify({"status": "200"})
                     return redirect(url_for('index'))
             if str(is_mt) == '0':
@@ -95,9 +96,9 @@ def sendMail():
         random_sample = ''.join(random_sample)
         print(random_sample)
         redis_cache.set("random_sample", str(random_sample))
-        msg = Message(subject="南阳理工学院二手交易平台动态码", recipients=[email])
+        msg = Message(subject="郑州市二手交易平台动态码", recipients=[email])
         msg.html = "<b><img src='http://pgfgqbd3k.bkt.clouddn.com/loginUI.png' " \
-                   "style='width:260px'></b><br><b>南阳理工学院二手交易平台注册动态码:" \
+                   "style='width:260px'></b><br><b>郑州市二手交易平台注册动态码:" \
                    "<font color='red'>" + random_sample + "</font><b>"
         send_mail.send(msg)
         return jsonify({"msg": "", 'status': "200"})
