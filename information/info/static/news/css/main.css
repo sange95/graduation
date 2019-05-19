@@ -3,13 +3,13 @@ body{
     font-family:'Microsoft YaHei';
 }
 .header_con{
-    height:59px;
+    height:110px;
     background:#fff;
     border-bottom:1px solid #ccc;
 }
 .header{
     width:1200px;
-    height:59px;
+    height:110px;
     margin:0px auto;
 }
 
@@ -21,7 +21,7 @@ body{
 
 .menu{
     width:600px;
-    height:59px;
+    height:100px;
     margin-left:100px;
 }
 
@@ -895,7 +895,7 @@ body{
 .reply_form{
     width:718px;
     overflow:hidden;
-    margin:10px 0 0 60px;
+    margin:12px 0 0 35px;
     display:none;
 }
 
@@ -916,7 +916,7 @@ body{
     border:0px;
     border-radius:2px;
     color:#fff;
-    margin:10px 5px 0 10px;
+    margin:10px 29px 0 -15px;
     cursor:pointer;
 }
 

@@ -11,7 +11,7 @@
     {% endblock %}
     <link rel="stylesheet" type="text/css" href="../../static/news/css/main.css">
     <link rel="stylesheet" type="text/css" href="../../static/bootstrap-4.3.1/dist/css/bootstrap.min.css">
-    <script type="text/javascript" src="../../static/js/jquery-3.2.1/jquery-3.2.1.js"></script>>
+    <script type="text/javascript" src="../../static/js/jquery-3.2.1/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="../../static/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../static/news/js/main.js"></script>
     {% block scriptBlock %}
@@ -31,6 +31,17 @@
                     <li data-cid=""><a href="/question">问答咨询</a></li>
                     <li data-cid=""><a href="/appointment/index">回收预约</a></li>
                     <li data-cid=""><a href="/rent/index">租房查询</a></li>
+{#                </ul>#}
+{#                <ul class="menu fl">#}
+                {% for category in data.category_li %}
+                    {% if loop.index == 1 %}
+                        <li data-cid="{{ category.id }}" class="active"><a href="javascript:;">{{ category.name }}</a></li>
+                    {% else %}
+                        <li data-cid="{{ category.id }}"><a href="javascript:;">{{ category.name }}</a></li>
+                    {% endif %}
+
+                {% endfor %}
+
                 </ul>
             {% endblock %}
 
@@ -89,7 +100,7 @@
             <a href="">友情链接</a>
         </div>
         <p class="copyright">
-            CopyRight © 2019 新经资讯信息技术有限公司 All Rights Reserved<br />
+            CopyRight © 2019 72便信息技术有限公司 All Rights Reserved<br />
 电话：010-****888    京ICP备*******8号
         </p>
     </div>

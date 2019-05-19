@@ -74,8 +74,8 @@ function updateNewsData() {
             $('.menu li').each(function () {
                 $(this).removeClass('active')
             })
-            console.log((currentCid), $('.menu li').index(currentCid - 1)   )
-            $('.menu li').eq(currentCid - 1).addClass("active")
+            console.log((currentCid), $('.menu li').index(currentCid + 4)   )
+            $('.menu li').eq(currentCid + 4).addClass("active")
             // 显示数据
             for (var i=0;i<resp.data.news_dict_li.length;i++) {
                 var news = resp.data.news_dict_li[i]

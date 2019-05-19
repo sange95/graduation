@@ -1,3 +1,5 @@
+import uuid
+
 from flask import render_template, g, redirect, request, jsonify, current_app, session, abort
 
 from info import db, constants
@@ -252,17 +254,22 @@ def news_release():
         # 将收到的图片读取
         index_image_data = index_image.read()
         # 上传到七牛云
-        key = storage(index_image_data)
+        # key = storage(index_image_data)
     except Exception as e:
         current_app.logger.error(e)
         return jsonify(errno=RET.PARAMERR, errmsg="参数有误")
+    pic_name = str(uuid.uuid1()) + ".jpg"
+    # print(url)
+    # print(url)
+    with open("info/static/picture/" + pic_name, "wb") as f:
+        f.write(index_image_data)
     # 创建一个新闻对象
     news = News()
     news.title = title
     news.source = source
     news.digest = digest
     news.content = content
-    news.index_image_url = constants.QINIU_DOMIN_PREFIX + key
+    news.index_image_url = "/static/picture/"+ pic_name
     news.category_id = category_id
     news.title = title
     news.user_id = g.user.id
@@ -369,24 +376,31 @@ def pic_info():
         return render_template('news/user_pic_info.html',
                                data=({"user": user.to_dict()})
                                )
+
+
     # 1，获取文件
     try:
         avatar_file = request.files.get("avatar").read()
     except Exception as e:
         current_app.logger.error(e)
         return jsonify(errno=RET.PARAMERR, errmsg="读取文件出错")
-
+    print(avatar_file)
+    pic_name = str(uuid.uuid1())+".jpg"
+    # print(url)
+    # print(url)
+    with open("info/static/picture/"+pic_name, "wb") as f:
+        f.write(avatar_file)
     # 2，将文件上传到七牛云
-    try:
-        url = storage(avatar_file)
-    except Exception as e:
-        current_app.logger.error(e)
-        return jsonify(errno=RET.THIRDERR, errmsg="上传图片失败")
+    # try:
+    #     url = storage(avatar_file)
+    # except Exception as e:
+    #     current_app.logger.error(e)
+    #     return jsonify(errno=RET.THIRDERR, errmsg="上传图片失败")
 
     # 3，更新用户模型中的头像信息
 
     # 设置用户模型的的相关数据
-    user.avatar_url = url
+    user.avatar_url = "/static/picture/"+pic_name
     try:
         db.session.commit()
     except Exception as e:
@@ -396,7 +410,7 @@ def pic_info():
 
     # 4，返回响应，讲文件的路径返回
     return jsonify(errno=RET.OK, errmsg="ok", data={
-        "avatar_url": constants.QINIU_DOMIN_PREFIX + url
+        "avatar_url": user.avatar_url
     })
 
 

@@ -492,3 +492,9 @@ def login():
 
     # 跳转后台管理首页
     return redirect(url_for("admin.index"))
+
+
+@admin_blu.route("/logout", methods=["get"])
+def logout():
+    session.clear()
+    return jsonify(errno="OK")
