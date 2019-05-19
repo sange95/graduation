@@ -32,7 +32,7 @@ class fangtianxia:
         }
 
     def get_uuid(self):
-        return uuid.uuid1()
+        return str(uuid.uuid1())
 
     # def save_img(self, url_list):
     #     for url in url_list:

@@ -20,19 +20,6 @@ def detail():
     """
     house_id = request.args.get("house_id", None)
     print(house_id)
-    # house_id = json.loads(house_id)
-    # print(house_id)
-    # user_id = session.get('user_id', None)
-
-
-    # user = None
-    # if user_id:
-    #     try:
-    #         user = User.query.get(user_id)
-    #         # print(user)
-    #     except Exception as e:
-    #         current_app.logger.error(e)
-    # user = g.user
     if house_id:
         info = collection.find_one({"_id": house_id})
         print(info)

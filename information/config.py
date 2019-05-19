@@ -34,8 +34,8 @@ class Config(object):
     # mongodb的配置
     MONGODB_HOST = "47.99.62.36"
     MONGODB_PORT = 27017
-    MONGODB_NAME = 's'
-    MONGODB_SET = 's'
+    MONGODB_NAME = 'sl'
+    MONGODB_SET = 'sl'
 
 
 class DevelopmentConfig(Config):
