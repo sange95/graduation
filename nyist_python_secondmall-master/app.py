@@ -28,10 +28,10 @@ with app.app_context():
 
 @app.route('/')
 def index():
-    print(session.values())
-    print("主页。。。。。。。。。。。。")
-    productList = Product.query.filter(Product.is_sell == 1,Product.is_pass == 2).order_by(Product.click_count.desc()).slice(0, 10)
-    productList1 = Product.query.filter(Product.is_sell == 1,Product.is_pass == 2).order_by(Product.pdate.desc()).slice(0, 10)
+    productList = Product.query.filter(Product.is_sell == 1, Product.is_pass == 2).order_by(
+        Product.click_count.desc()).slice(0, 10)
+    productList1 = Product.query.filter(Product.is_sell == 1, Product.is_pass == 2).order_by(
+        Product.pdate.desc()).slice(0, 10)
     productList2 = redis_cache.get('productList2')
     category = Category.query.all()
     # 推广产品
@@ -48,7 +48,6 @@ def index():
     else:
         productList2 = productList2.decode('utf8')
         productList2 = json.loads(productList2)
-        print(productList2)
     return render_template('user/index.html', hot_products=productList, new_products=productList1,
                            extend_products=productList2, categorys=category)
 
@@ -64,16 +63,18 @@ def my_context_processor():
             category = Category.category_json(category)
             categoryList.append(category)
         json_dumps = json.dumps(categoryList, ensure_ascii=False)
-        print(json_dumps)
+        # print(json_dumps)
         redis_cache.set("categoryList", json_dumps)
     else:
         categoryList = categoryList.decode('utf8')
         categoryList = json.loads(categoryList)
-        print(categoryList)
+        # print(categoryList)
     uid = session.get("uid")
+    print(uid)
     last_time = ""
     if uid is not None:
         user = User.query.get(uid)
+        print(user.username)
         if user.shop_time is not None:
             result_time = datetime.now() - user.shop_time
             resultTime = str(result_time).split(':')
@@ -96,16 +97,14 @@ def my_context_processor():
         length = 0
         for shopCart in user.shopcarts:
             length += shopCart.count
-
+        print("登录了")
+        print(categoryList)
         return {"uid": uid, "username": user.username, 'user_img': user.img_url, "categorys": categoryList,
                 "category_all": category_all, "last_time": last_time, "length": length}
     else:
+        print("没有登录")
+        print(categoryList)
         return {"categorys": categoryList, "category_all": category_all, "uid": "", "length": "0"}
-
-
-# @app.errorhandler(404)
-# def not_foundPage():
-#     return redirect(url_for('index'))
 
 
 if __name__ == '__main__':

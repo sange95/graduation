@@ -5,6 +5,9 @@ function getCookie(name) {
 
 
 $(function(){
+    $(function() {
+        $($(".menu li")[0]).addClass("active")
+    })
 
     // 打开登录框
     $('.comment_form_logout').click(function () {

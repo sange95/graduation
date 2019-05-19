@@ -278,6 +278,9 @@
 
 {% block scriptBlock %}
 <script type="text/javascript">
+    $(function() {
+        $($(".menu li")[4]).addClass("active")
+    })
     $("#bigimg img").attr("src", $(".imgcheck").attr("src"))
     // 切换图片
     $(".move").click(function() {

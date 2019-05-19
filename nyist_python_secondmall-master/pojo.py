@@ -58,7 +58,7 @@ class Product(db.Model):
     head_img = db.Column(db.Text)
     is_hot = db.Column(db.Integer, default=0)  # 0不是热卖品，1热卖品 2推广品
     is_sell = db.Column(db.Integer, default=1)  # 0销完 1在售
-    is_pass = db.Column(db.Integer, default=0)  # 0正在审核 1审核未通过 2 审核通过
+    is_pass = db.Column(db.Integer, default=2)  # 0正在审核 1审核未通过 2 审核通过
     pdate = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
     click_count = db.Column(db.Integer, default=0)
     counts = db.Column(db.Integer, nullable=False)

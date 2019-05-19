@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}-知乎问答平台</title>
+    <title>{% block title %}{% endblock %}-72Bian问答平台</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/reset.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
@@ -14,46 +16,82 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/" style="color: #0f88eb; font-size: x-large">知乎</a>
-            </div>
+{#    <nav class="navbar navbar-default">#}
+{#        <div class="container">#}
+{#            <!-- Brand and toggle get grouped for better mobile display -->#}
+{#            <div class="navbar-header">#}
+{#                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"#}
+{#                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">#}
+{#                    <span class="sr-only">Toggle navigation</span>#}
+{#                    <span class="icon-bar"></span>#}
+{#                    <span class="icon-bar"></span>#}
+{#                    <span class="icon-bar"></span>#}
+{#                </button>#}
+{#                <a class="navbar-brand" href="/" style="color: #0f88eb; font-size: x-large">72Bian</a>#}
+{#            </div>#}
+{##}
+{#            <!-- Collect the nav links, forms, and other content for toggling -->#}
+{#            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
+{#                <ul class="nav navbar-nav">#}
+{#                    <li class="active"><a href="/">首页<span class="sr-only">(current)</span></a></li>#}
+{#                    <li><a href="{{ url_for('question') }}">发布问答</a></li>#}
+{#                </ul>#}
+{#                <form class="navbar-form navbar-left">#}
+{#                    <div class="form-group">#}
+{#                        <input type="text" class="form-control" placeholder="搜索你感兴趣的内容...">#}
+{#                    </div>#}
+{#                    <button type="submit" class="btn btn-default" style="background-color: #0f88eb; color: white">提问</button>#}
+{#                </form>#}
+{#                <ul class="nav navbar-nav navbar-right">#}
+{#                    {% if user %}#}
+{#                    <li><a href="#">{{ user.username }}</a></li>#}
+{#                    <li><a href="{{ url_for('logout') }}">注销</a></li>#}
+{#                    {% else %}#}
+{#                    <li><a href="{{ url_for('login') }}">登陆</a></li>#}
+{#                    <li><a href="{{ url_for('register') }}">注册</a></li>#}
+{#                    {% endif %}#}
+{#                </ul>#}
+{#            </div>#}
+{#        </div>#}
+{#    </nav>#}
+    <div class="header_con">
+    <div class="header_con">
+        <div class="header">
+            <a href="/" class="logo fl"><img src="../../static/images/logo44.jpg" alt="logo"></a>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">首页<span class="sr-only">(current)</span></a></li>
-                    <li><a href="{{ url_for('question') }}">发布问答</a></li>
-                </ul>
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="搜索你感兴趣的内容...">
-                    </div>
-                    <button type="submit" class="btn btn-default" style="background-color: #0f88eb; color: white">提问</button>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    {% if user %}
-                    <li><a href="#">{{ user.username }}</a></li>
-                    <li><a href="{{ url_for('logout') }}">注销</a></li>
-                    {% else %}
-                    <li><a href="{{ url_for('login') }}">登陆</a></li>
-                    <li><a href="{{ url_for('register') }}">注册</a></li>
-                    {% endif %}
-                </ul>
+            <ul class="menu fl">
+                <li data-cid=""><a href="http://127.0.0.1:5000/new_index">新闻资讯</a></li>
+                <li data-cid=""><a href="http://127.0.0.1:5001">二手商城</a></li>
+                <li data-cid=""><a href="http://127.0.0.1:5003">问答咨询</a></li>
+                <li data-cid=""><a href="http://127.0.0.1:5000/appointment/index">回收预约</a></li>
+                <li data-cid=""><a href="http://127.0.0.1:5000/rent/index">租房查询</a></li>
+            </ul>
+
+
+            {% if data %}
+
+            <!-- 用户登录后显示下面，隐藏上面 -->
+            <div class="user_login fr">
+                <img src="{% if data.user.avatar_url %}{{ data.user.avatar_url }}{% else %}../../static/news/images/person01.png{% endif %}" class="lgin_pic">
+                <a href="/user/info" id="nick_name">{{ data.user.nick_name }}</a>
+                <a href="/passport/logout">退出</a>
             </div>
+                {% else %}
+                <div class="user_btns fr">
+                <a href="javascript:;" class="login_btn">登录</a> / <a href="javascript:;" class="register_btn">注册</a>
+            </div>
+            {% endif %}
         </div>
-    </nav>
+    </div>
     <div class="main">
         {% block main %}{% endblock %}
     </div>
 </body>
+{% block js %}
+<script type="text/javascript">
+    $(function() {
+        $($(".menu li")[2]).addClass("active")
+    })
+</script>
+{% endblock %}
 </html>

@@ -1,13 +1,11 @@
 import logging
 from logging.handlers import RotatingFileHandler
-from flask import Flask, make_response, g, render_template
+from flask import Flask, g, render_template
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf import CSRFProtect
 from flask_wtf.csrf import generate_csrf
 from pymongo import MongoClient
 from redis import StrictRedis
-
 
 # from config import Config
 from config import config
@@ -17,8 +15,7 @@ from config import config
 
 db = SQLAlchemy()
 redis_store = None  # type: StrictRedis
-collection = None   # type: MongoClient
-
+collection = None  # type: MongoClient
 
 
 def setup_log(config_name):

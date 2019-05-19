@@ -18,15 +18,15 @@
 {% endblock %}
 <body>
     <div class="header_con">
-        <div class="header">---
+        <div class="header">
             <a href="/" class="logo fl"><img src="../../static/news/images/logo44.jpg" alt="logo"></a>
   
             <ul class="menu fl">
-                <li data-cid=""><a href="/new_index">新闻资讯</a></li>
-                <li data-cid=""><a href="/store">二手商城</a></li>
-                <li data-cid=""><a href="/question">问答咨询</a></li>
-                <li data-cid=""><a href="/appointment/index">回收预约</a></li>
-                <li data-cid=""><a href="/rent/index">租房查询</a></li>
+                <li data-cid=""><a href="http://127.0.0.1:5000/new_index">新闻资讯</a></li>
+                <li data-cid=""><a href="http://127.0.0.1:5001">二手商城</a></li>
+                <li data-cid=""><a href="http://127.0.0.1:5003">问答咨询</a></li>
+                <li data-cid=""><a href="http://127.0.0.1:5000/appointment/index">回收预约</a></li>
+                <li data-cid=""><a href="http://127.0.0.1:5000/rent/index">租房查询</a></li>
             </ul>
 
 
@@ -35,7 +35,7 @@
             <!-- 用户登录后显示下面，隐藏上面 -->
             <div class="user_login fr">
                 <img src="{% if data.user.avatar_url %}{{ data.user.avatar_url }}{% else %}../../static/news/images/person01.png{% endif %}" class="lgin_pic">
-                <a href="/user/info" id="nick_name">{{ data.user.nick_name }}</a>
+                <a href="/user/info" id="nick_name">个人主页</a>
                 <a href="/passport/logout">退出</a>
             </div>
                 {% else %}
