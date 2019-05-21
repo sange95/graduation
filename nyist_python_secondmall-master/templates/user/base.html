@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}-南工二手交易市场</title>
+    <title>{% block title %}{% endblock %}-72便二手交易市场</title>
     <script src="{{ url_for('static',filename='js/jquery-3.1.1.min.js') }}"></script>
     <link href="{{ url_for('static',filename='css/base.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ url_for('static',filename='sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css"/>
@@ -33,23 +33,22 @@
 		
 			<ul class="supmenu fl">
 				<li data-cid=""><a href="http://127.0.0.1:5000/new_index">新闻资讯</a></li>
-				<li data-cid=""><a href="http://127.0.0.1:5001">二手商城</a></li>
+				<li class="active" data-cid=""><a href="http://127.0.0.1:5001">二手商城</a></li>
 				<li data-cid=""><a href="http://127.0.0.1:5003">问答咨询</a></li>
 				<li data-cid=""><a href="http://127.0.0.1:5000/appointment/index">回收预约</a></li>
 				<li data-cid=""><a href="http://127.0.0.1:5000/rent/index">租房查询</a></li>
 			</ul>
 			{% if username %}
-		
 			<!-- 用户登录后显示下面，隐藏上面 -->
-			<div class="user_login fr">
-				<img src="{% if data.user.avatar_url %}{{ data.user.avatar_url }}{% else %}../../static/news/images/person01.png{% endif %}" class="lgin_pic">
-				<a href="/user/info" id="nick_name">{{ data.user.nick_name }}</a>
-				<a href="/passport/logout">退出</a>
-			</div>
-				{% else %}
-				<div class="user_btns fr">
-				<a href="javascript:;" class="login_btn">登录&nbsp;</a> / <a href="javascript:;" class="register_btn">&nbsp;注册</a>
-			</div>
+                <div class="user_login fr">
+                    <img src="{% if user_img %}{{ user_img }}{% else %}../../static/news/images/person01.png{% endif %}" class="lgin_pic">
+                    <a href="/user/info" id="nick_name">{{ username }}</a>
+                    <a href="/passport/logout">退出</a>
+                </div>
+            {% else %}
+                <div class="user_btns fr">
+                    <a href="javascript:;" class="login_btn">登录&nbsp;</a> / <a href="javascript:;" class="register_btn">&nbsp;注册</a>
+                </div>
 			{% endif %}
 		</div>
 	</div>
@@ -111,7 +110,7 @@
 		</ul>
 	</div>
 	<div class="span24">
-		<div class="copyright">Copyright © 2018 南工二手交易市场 版权所有</div>
+		<div class="copyright">Copyright © 2018 72便二手交易市场 版权所有</div>
 	</div>
 </div>
 

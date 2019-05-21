@@ -66,6 +66,7 @@
     height:30px;
     overflow: hidden;
     margin-top:15px;
+    float: right;
     /*display:none;    */
 }
 
