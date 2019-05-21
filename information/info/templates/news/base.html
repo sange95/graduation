@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{% block titleBlock %}
 
-    {% endblock %}</title>
+        {% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="../../static/news/css/reset.css">
     {% block cssBlock %}
 
@@ -17,44 +18,35 @@
     {% block scriptBlock %}
 
     {% endblock %}
-{#    <script type="text/javascript" src="../../static/news/js/index.js"></script>#}
+    {#    <script type="text/javascript" src="../../static/news/js/index.js"></script>#}
 </head>
+
 <body>
     <div class="header_con">
         <div class="header">
             <a href="/" class="logo fl"><img src="../../static/news/images/logo44.jpg" alt="logo"></a>
             <div id="currentcid" style="display:none">{{ data.cid }}</div>
             {% block categoryBlock %}
-                <ul class="menu fl">
-                    <li data-cid=""><a href="/new_index">新闻资讯</a></li>
-                    <li data-cid=""><a href="/store">二手商城</a></li>
-                    <li data-cid=""><a href="/question">问答咨询</a></li>
-                    <li data-cid=""><a href="/appointment/index">回收预约</a></li>
-                    <li data-cid=""><a href="/rent/index">租房查询</a></li>
-{#                </ul>#}
-{#                <ul class="menu fl">#}
-                {% for category in data.category_li %}
-                    {% if loop.index == 1 %}
-                        <li data-cid="{{ category.id }}" class="active"><a href="javascript:;">{{ category.name }}</a></li>
-                    {% else %}
-                        <li data-cid="{{ category.id }}"><a href="javascript:;">{{ category.name }}</a></li>
-                    {% endif %}
-
-                {% endfor %}
-
-                </ul>
+            <ul class="menu fl">
+                <li data-cid=""><a href="/new_index">新闻资讯</a></li>
+                <li data-cid=""><a href="/store">二手商城</a></li>
+                <li data-cid=""><a href="/question">问答咨询</a></li>
+                <li data-cid=""><a href="/appointment/index">回收预约</a></li>
+                <li data-cid=""><a href="/rent/index">租房查询</a></li>
+            </ul>
             {% endblock %}
 
             {% if data.user %}
 
             <!-- 用户登录后显示下面，隐藏上面 -->
             <div class="user_login fr">
-                <img src="{% if data.user.avatar_url %}{{ data.user.avatar_url }}{% else %}../../static/news/images/person01.png{% endif %}" class="lgin_pic">
+                <img src="{% if data.user.avatar_url %}{{ data.user.avatar_url }}{% else %}../../static/news/images/person01.png{% endif %}"
+                    class="lgin_pic">
                 <a href="/user/info" id="nick_name">个人主页</a>
                 <a href="/passport/logout">退出</a>
             </div>
-                {% else %}
-                <div class="user_btns fr">
+            {% else %}
+            <div class="user_btns fr">
                 <a href="javascript:;" class="login_btn">登录</a> / <a href="javascript:;" class="register_btn">注册</a>
             </div>
             {% endif %}
@@ -62,11 +54,19 @@
     </div>
 
     <div class="conter_con">
+        <ul class="zimenu zifl">
+            {% for category in data.category_li %}
+            {% if loop.index == 1 %}
+            <li data-cid="{{ category.id }}" class="active"><a href="javascript:;">{{ category.name }}</a></li>
+            {% else %}
+            <li data-cid="{{ category.id }}"><a href="javascript:;">{{ category.name }}</a></li>
+            {% endif %}
+            {% endfor %}
+        </ul>
         {% block contentBlock %}
-
         {% endblock %}
         {% block rankBlock %}
-            <div class="rank_con fr">
+        <div class="rank_con fr">
             {% block authorBlock %}
 
             {% endblock %}
@@ -75,13 +75,9 @@
             </div>
             <ul class="rank_list">
                 {% for news in data.news_dict_li %}
-                    <li><span {% if loop.index == 1 %}
-                    class="first"
-                    {% elif loop.index == 2 %}
-                        class="second"
-                    {% elif loop.index == 3 %}
-                        class="third"
-                    {% endif %}>{{ loop.index }}</span><a href="{{ url_for("news.news_detail",news_id=news.id) }}">{{ news.title }}</a></li>
+                <li><span {% if loop.index == 1 %} class="first" {% elif loop.index == 2 %} class="second"
+                        {% elif loop.index == 3 %} class="third" {% endif %}>{{ loop.index }}</span><a
+                        href="{{ url_for("news.news_detail",news_id=news.id) }}">{{ news.title }}</a></li>
 
                 {% endfor %}
             </ul>
@@ -101,7 +97,7 @@
         </div>
         <p class="copyright">
             CopyRight © 2019 72便信息技术有限公司 All Rights Reserved<br />
-电话：010-****888    京ICP备*******8号
+            电话：010-****888 京ICP备*******8号
         </p>
     </div>
     {% endblock %}
@@ -159,7 +155,7 @@
                 <div class="input_tip">密码(不少于6位)</div>
                 <div id="register-password-err" class="error_tip">密码不能为空</div>
             </div>
-            <div  class="form_group2 clearfix">
+            <div class="form_group2 clearfix">
                 <input type="checkbox" class="agree_input" checked>
                 <p>同意使用条款，并已阅读"跟帖评论自律管理承诺书"</p>
                 <div class="error_tip">请勾选</div>
@@ -170,4 +166,5 @@
         <div class="mask"></div>
     </form>
 </body>
+
 </html>
