@@ -1,0 +1,86 @@
+.supheader{
+    width:1200px;
+    height:59px;
+    margin:0px auto;
+}
+.header_con{
+    height:59px;
+    background:#fff;
+    border-bottom:1px solid #ccc;
+}
+.suplogo{
+    width:140px;
+    height:33px;
+    margin-top:8px;
+}
+
+.supmenu{
+    width:600px;
+    height:59px;
+    margin-left:100px;
+    display: inline-flex;
+}
+
+.supmenu li{
+    height:59px;
+    float:left;
+}
+
+.supmenu .active{
+    border-bottom:2px solid #009afc;
+}
+
+.supmenu .active a{
+    color:#39f;
+}
+
+.supmenu li a{
+    display:block;
+    line-height:59px;
+    padding:0px 25px;
+    font-size:14px;
+    color:#666;
+}
+
+.supmenu li a:hover{
+    color:#39f;
+}
+
+.user_btns{
+    line-height:59px;
+    font-size:14px;
+    color:#666;
+    display: inline-flex;
+    float: right;
+}
+
+.user_btns a{
+    color:#666;
+}
+
+.user_btns a:hover{
+    color:#39f;
+}
+
+.user_login{
+    height:30px;
+    overflow: hidden;
+    margin-top:15px;
+    float: right;
+    /*display:none;    */
+}
+
+.user_login img{
+    float:left;
+    width:30px;
+    height:30px;
+    border-radius:15px;
+}
+
+.user_login a{
+    float:left;
+    font-size:14px;
+    margin-left:10px;
+    color:#39f;
+    line-height:30px;
+}

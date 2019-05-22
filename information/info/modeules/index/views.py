@@ -2,7 +2,8 @@ from info.models import User, News, Category
 from info.untils.captcha.response_code import RET
 from info.untils.common import user_login_data
 from . import index_blu
-from flask import render_template, current_app, session, request, jsonify, g, sessions
+from flask import render_template, current_app, session, request, jsonify, g
+from info import collection
 
 
 @index_blu.route('/news_list')
@@ -136,7 +137,19 @@ def supindex():
         except Exception as e:
             current_app.logger.error(e)
     user = g.user
+    # mongo查询数据
 
+    result = collection.find().limit(5)
+    rent_data = []
+    for data in result:
+        rent_data.append({
+            "_id": data["_id"],
+            "area": data["local"],
+            "apart": data["xiaoqu_name"][0],
+            "square": data["jianzumianji"] if data["jianzumianji"] else 0,
+            "price": data["money"] if data["money"] else 0,
+            "house_type": data["huxing"] if data["huxing"] else "一室一厅",
+        })
     data = {
         "user": user.to_dict() if user else None,
     }

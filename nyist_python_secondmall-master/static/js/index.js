@@ -39,10 +39,10 @@
          })
          $(".my_nav_tab li:last").click(function () {
             username = $(".user_msg").text()
-            if (username == ""){
+            // if (username == ""){
 
-                $(".open_loginUI").click()
-            }
+            //     $(".open_loginUI").click()
+            // }
 
         })
         $(".login_btn").click(function () {
@@ -59,12 +59,13 @@
              $(".one_cate").attr('cid',$(this).attr('id'))
              $(this).addClass('disabled').siblings('li').removeClass('disabled')
              cid = $(this).attr('id')
-             $.getJSON('/product/getCategorySecond','cid='+cid,function (result) {
+             $.get('/product/getCategorySecond','cid='+cid,function (result) {
+                 data = result.data
                 $(".cate_two").empty()
                  append_html=""
-                 for(var i = 0;i < result.length;i++){
+                 for(var i = 0;i < data.length;i++){
 
-                     append_html+="<li id='"+result[i]["csid"]+"'><a href='#'>"+result[i]["csname"]+"</a></li>"
+                     append_html+="<li id='"+data[i]["csid"]+"'><a href='#'>"+data[i]["csname"]+"</a></li>"
 
                  }
 

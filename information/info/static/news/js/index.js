@@ -4,10 +4,13 @@ var data_querying = true;   // 是否正在向后台获取数据
 $(function () {
     // 界面加载完成后加载新闻
     updateNewsData();
+    $(function() {
+        $($(".menu li")[0]).addClass("active")
+    })
     // 首页分类切换
-    $('.menu li').click(function () {
+    $('.zimenu li').click(function () {
         var clickCid = $(this).attr('data-cid')
-        $('.menu li').each(function () {
+        $('.zimenu li').each(function () {
             $(this).removeClass('active')
         })
         $(this).addClass('active')
@@ -71,11 +74,6 @@ function updateNewsData() {
             if(cur_page==1){
                $(".list_con").html('')
             }
-            $('.menu li').each(function () {
-                $(this).removeClass('active')
-            })
-            console.log((currentCid), $('.menu li').index(currentCid + 4)   )
-            $('.menu li').eq(currentCid + 4).addClass("active")
             // 显示数据
             for (var i=0;i<resp.data.news_dict_li.length;i++) {
                 var news = resp.data.news_dict_li[i]

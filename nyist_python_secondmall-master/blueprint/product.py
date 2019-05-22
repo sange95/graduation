@@ -349,16 +349,18 @@ def getClassify():
                            pages=page_all.pages, categorySecond=categorySecond, category_my=category)
 
 
-@product_dp.route("/getCategorySec"
-                  "ond")
+@product_dp.route("/getCategorySecond")
 def getCategorySecond():
     cid = request.args.get("cid")
+    print(cid)
     cs_dicts = []
     categorySeconds = CategorySecond.query.filter(CategorySecond.cid == str(cid)).all()
     for categorySecond in categorySeconds:
+        print(categorySecond.id, categorySecond.csname)
         cs_dict = {"csid": categorySecond.id, "csname": categorySecond.csname}
         cs_dicts.append(cs_dict)
-    return jsonify(cs_dicts)
+    print(cs_dicts)
+    return jsonify({"data": cs_dicts})
 
 
 @product_dp.route("/deleteProduct")

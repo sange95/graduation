@@ -3,7 +3,7 @@ import os
 
 DEBUG = True
 
-SECRET_KEY = os.urandom(24)
+SECRET_KEY = '123456'
 
 DIALECT = 'mysql'
 DRIVER = 'pymysql'
