@@ -139,17 +139,17 @@ def supindex():
     user = g.user
     # mongo查询数据
 
-    result = collection.find().limit(5)
-    rent_data = []
-    for data in result:
-        rent_data.append({
-            "_id": data["_id"],
-            "area": data["local"],
-            "apart": data["xiaoqu_name"][0],
-            "square": data["jianzumianji"] if data["jianzumianji"] else 0,
-            "price": data["money"] if data["money"] else 0,
-            "house_type": data["huxing"] if data["huxing"] else "一室一厅",
-        })
+    # result = collection.find().limit(5)
+    # rent_data = []
+    # for data in result:
+    #     rent_data.append({
+    #         "_id": data["_id"],
+    #         "area": data["local"],
+    #         "apart": data["xiaoqu_name"][0],
+    #         "square": data["jianzumianji"] if data["jianzumianji"] else 0,
+    #         "price": data["money"] if data["money"] else 0,
+    #         "house_type": data["huxing"] if data["huxing"] else "一室一厅",
+    #     })
     data = {
         "user": user.to_dict() if user else None,
     }

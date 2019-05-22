@@ -1,10 +1,15 @@
 import json
+import random
 import re
 from pprint import pprint
+
+from bson import ObjectId
 
 from info import collection
 from info.models import User
 from info.untils.common import user_login_data
+from info.untils.get_phone import get_phone
+from info.untils.json_conversion import JSONEncoder
 from ..rent import rent_bul
 from flask import render_template, session, current_app, g, request, jsonify, abort
 
@@ -12,29 +17,24 @@ from flask import render_template, session, current_app, g, request, jsonify, ab
 @rent_bul.route("/detail", methods=["get"])
 # @user_login_data
 def detail():
-    # print("ccccccccccccc")
-    # data = "ccc"
     """
     详情页
     :return:
     """
     house_id = request.args.get("house_id", None)
-    print(house_id)
+    # print(house_id)
     if house_id:
-        info = collection.find_one({"_id": house_id})
-        print(info)
+        info = collection.find_one({"_id": ObjectId(house_id)})
+        # pprint(info)
+        info["phone"] = get_phone()
+        info["view_count"] = random.randint(100, 2000)
+        # print(info["phone"])
         data = {
             # "user": user,
             "info": info
         }
         return render_template("rent/detail.html", data=data)
     else:
-
-        # data = {
-        #     "user": user
-        # }
-
-        # return render_template('news/404.html', data=data)
         return render_template('news/404.html')
 
 
@@ -52,31 +52,13 @@ def index():
     if user_id:
         try:
             user = User.query.get(user_id)
-            # print(user)
         except Exception as e:
             current_app.logger.error(e)
     user = g.user
-    # local = request.args.get("local", None)
-    # if local:
-    #     data = collection.find({"local": local})
-    # else:
-    data = collection.find()
-    j = 1
-    # print(5555)
-    # 放置所有的房子信息
-    a_list = list()
-    for i in data:
-        j += 1
-        # pprint(i)
-        a_list.append(i)
-
-        if j == 11:
-            break
-    # print(a_list)
-    # print(a_list[1]["xiaoqu_name"])
+    data = collection.find().limit(10)
     data = {
         "user": user,
-        "info": a_list
+        "info": data
     }
     # return jsonify(data)
     # print(data)
@@ -92,46 +74,26 @@ def sort():
     按照条件查询
     :return:
     """
-    # user_id = session.get('user_id', None)
-    # user = None
-    # if user_id:
-    #     try:
-    #         user = User.query.get(user_id)
-    #         # print(user)
-    #     except Exception as e:
-    #         current_app.logger.error(e)
-    # user = g.user
-    # local = request.args.get("local", None)
-    # if local:
-    #     data = collection.find({"local": local})
-    # else:
-    # 这个字符串
-    # 字符串
     page = int(request.form.get("curPage", 1))
     skip = int(request.form.get("pageSize", 5))
     # print(page)
     # print(skip)
-    xiaoquname = request.form.get("tiaojian", None)
-    # print(json.loads(xiaoquname))
+    # xiaoquname = request.form.get("tiaojian", None)
+
     # 这下边的都是json
     local = request.form.get("area", None)
-    # print(json.loads(local))
-    # money = request.form.get("price", "")
-    # 合租 用json.loads()转换
+    print(dict(request.form))
     chuzufangshi = request.form.get("rentype", None)
-    # 两室
     huxing = request.form.get("hometype", None)
-    print(xiaoquname)
-    print(local)
-    print(chuzufangshi)
-    print(huxing)
-
-    # print(huxing)
     info_list = list()
+    print(local)
+    # print(type(local))
     if local:
         local = json.loads(local)
     else:
-        local = ["金水区"]
+        local = ["金水"]
+
+    print(local)
     if chuzufangshi:
         chuzufangshi = json.loads(chuzufangshi)[0]
         # print(chuzufangshi)
@@ -203,11 +165,12 @@ def sort():
                     {"local": {"$in": local}, "huxing": {"$regex": str}}).skip((page - 1) * skip).limit(skip)
 
         else:
-            a_lists = collection.find({"local": {"$in": local}}).skip((page - 1) * skip).limit(skip)
+            a_lists = collection.find({"house_area": {"$in": local}}).skip((page - 1) * skip).limit(skip)
 
         for i in a_lists:
+            i["_id"] = JSONEncoder().encode(i["_id"])
             info_list.append(i)
-
+    print(info_list)
     data = {
         # "user": user,
         "info": info_list

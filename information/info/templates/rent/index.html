@@ -273,14 +273,14 @@
                 <ul class="dataUl">
                     <div class="data">
                         <div class="rent-img">
-                            <a href='/rent/detail?house_id={{ info["_id"] }}'><img src="../../static/imgs/rent/486ea1f2-5d9e-11e9-9bf0-000c29019f85.jpg" alt=""></a>
+                            <a href='/rent/detail?house_id={{ info["_id"] }}'><img src="/static/imgs/rent/1fdebe26-63f1-11e9-89e9-000c29019f85.jpg" alt=""></a>
                         </div>
                         <div class="rent-info">
-                            <a href = '/rent/detail?house_id={{ info["_id"]}}'><h5 class="rent-title">{{ info["title"] | first }}</h5></a>
-                            <p class="rent-detail">{{ info["huxing"] }}<span>|</span>{{ info["jianzumianji"] }}<span>|</span>{{ info["loucheng"] }}/{{ info["zongloucheng"] }}<span>|</span>{{ info['chuzufangshi'] }}</p>
-                            <p class="rent-adress">{{ info["xioqu_name"] | first }}&nbsp;&nbsp;{{ info["dizhi"] }}</p>
+                            <a href = '/rent/detail?house_id={{ info["_id"]}}'><h5 class="rent-title">{{ info["title"]}}</h5></a>
+                            <p class="rent-detail">{{ info["house_type"] }}<span>|</span>{{ info["house_direction"] }}<span>|</span>{{ info['rent_type'] }}</p>
+                            <p class="rent-adress">{{ info["house_estate"] | first }}&nbsp;&nbsp;{{ info["house_road"] }}</p>
                         </div>
-                        <div class="rent-price">{{ info["money"] }}<strong>元/月</strong></div>
+                        <div class="rent-price">{{ info["price"] }}<strong>元/月</strong></div>
                     </div>
                 </ul>
             {% endfor %}
@@ -419,8 +419,8 @@
                 for (var val in info) {
                     let address = ""
 
-                    if (info[val].xiaoqu_name) {
-                        address = (info[val].xiaoqu_name)["0"]
+                    if (info[val].house_estate) {
+                        address = (info[val].house_estate)["0"]
                     }
                     template = template + `<ul class="dataUl">
                     <div class="data">
@@ -429,10 +429,10 @@
                         </div>
                         <div class="rent-info">
                             <a href = '/rent/detail?house_id=${info[val]._id}'><h5 class="rent-title">${info[val].title}</h5></a>
-                            <p class="rent-detail">${info[val].huxing}<span>|</span>${info[val].jianzumianji}<span>|</span>${info[val].loucheng}/${info[val].zongloucheng}<span>|</span>${info[val].chuzufangshi}</p>
-                            <p class="rent-adress">${address}&nbsp;&nbsp;${info[val].dizhi}</p>
+                            <p class="rent-detail">${info[val].house_type}<span>|</span>${info[val].house_type}<span>|</span>${info[val].house_direction}<span>|</span>${info[val].rent_type}</p>
+                            <p class="rent-adress">${address}&nbsp;&nbsp;${info[val].house_address}</p>
                         </div>
-                        <div class="rent-price">${info[val].money}<strong>元/月</strong></div>
+                        <div class="rent-price">${info[val].price}<strong>元/月</strong></div>
                     </div>
                 </ul>`
                 }
