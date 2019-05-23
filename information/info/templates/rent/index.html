@@ -207,16 +207,16 @@
         <div class="item area">
             <div class="area-title"><span style="color: #999999">区域：</span></div>
             <div class="area-elems">
-                <span class="item-elems">
+                <span class="item-elems" id="local-elems">
                     <span class="elem all check">全部</span>
-                    <span class="elem" href="www.baidu.com">郑东新区</span>
-                    <span class="elem">经开区</span>
-                    <span class="elem">高新区</span>
-                    <span class="elem">金水区</span>
-                    <span class="elem">管城区</span>
-                    <span class="elem">中原区</span>
-                    <span class="elem">惠济区</span>
-                    <span class="elem">二七区</span>
+                    <span class="elem">郑东新区</span>
+                    <span class="elem">经开</span>
+                    <span class="elem">高新</span>
+                    <span class="elem">金水</span>
+                    <span class="elem">管城</span>
+                    <span class="elem">中原</span>
+                    <span class="elem">惠济</span>
+                    <span class="elem">二七</span>
                     <span class="elem">中牟</span>
                     <span class="elem">荥阳</span>
                     <span class="elem">新郑</span>
@@ -294,157 +294,157 @@
 
 {% block scriptBlock %}
 <script type="text/javascript">
-    $(function() {
-        $($(".menu li")[4]).addClass("active")
-    })
-    // 搜索框的鼠标悬浮事件
-    $(".item-elems .elem").mouseenter(function() {
-        $(this).addClass("active")
-    })
-    $(".item-elems .elem").mouseout(function() {
-        $(this).removeClass("active")
-    })
-
-    // 搜索框点击事件
-    $(".item-elems span:not(.all)").click(function() {
-        if ($(this).hasClass("check")) {
-            $(this).removeClass("check")
-            let isAll = true
-            $(this).siblings(":not(.all)").each(function() {
-                if ($(this).hasClass("check")) {
-                    isAll = false
-                    $(this).siblings(".all").removeClass("check")
-                }
-                if (isAll) {
-                    $(this).siblings(".all").addClass("check")
-                }
-            })
-        } else {
-            $(this).addClass("check")
-            $(this).siblings(".all").removeClass("check")
-        }
-        searchAction()
-    })
-    $(".item-elems .all").click(function() {
-        $(this).addClass("check")
-        $(this).siblings().each(function() {
-            $(this).removeClass("check")
-        })
-        searchAction()
-    })
-    // 手动表单提交
-    function formSubmit() {
-        if (!$(".area .item-elems .all").hasClass("check")) {
-            let filerList = []
-            $(".area .item-elems span:not(.all)").each(function() {
-                if ($(this).hasClass("check")) {
-                    filerList.push($(this).text())
-                }
-            })
-            if (filerList.length != 0) {
-                var input = document.createElement("input");
-                input.name = "area"
-                input.type = "text"
-                $(input).css("display", "none")
-                input.value = JSON.stringify(filerList)
-                $("#search")[0].appendChild(input)
-            }
-        }
-        if (!$(".price .item-elems .all").hasClass("check")) {
-            let filerList = []
-            $(".price .item-elems span:not(.all)").each(function() {
-                if ($(this).hasClass("check")) {
-                    filerList.push($(this).text())
-                }
-            })
-            if (filerList.length != 0) {
-                var input = document.createElement("input");
-                input.name = "price"
-                input.type = "text"
-                $(input).css("display", "none")
-                input.value = JSON.stringify(filerList)
-                $("#search")[0].appendChild(input)
-            }
-        }
-        if (!$(".rentype .item-elems .all").hasClass("check")) {
-            let filerList = []
-            $(".rentype .item-elems span:not(.all)").each(function() {
-                if ($(this).hasClass("check")) {
-                    filerList.push($(this).text())
-                }
-            })
-            if (filerList.length != 0) {
-                var input = document.createElement("input");
-                input.name = "rentype"
-                input.type = "text"
-                $(input).css("display", "none")
-                input.value = JSON.stringify(filerList)
-                $("#search")[0].appendChild(input)
-            }
-        }
-        if (!$(".hometype .item-elems .all").hasClass("check")) {
-            let filerList = []
-            $(".hometype .item-elems span:not(.all)").each(function() {
-                if ($(this).hasClass("check")) {
-                    filerList.push($(this).text())
-                }
-            })
-            if (filerList.length != 0) {
-                var input = document.createElement("input");
-                input.name = "hometype"
-                input.type = "text"
-                $(input).css("display", "none")
-                input.value = JSON.stringify(filerList)
-                $("#search")[0].appendChild(input)
-            }
-        }
-    }
-
-    function searchAction() {
-        formSubmit()
-        Ajax(1, 10)
-    }
-
-    function Ajax(curPage,pageSize) {
-        $.ajax({
-            //几个参数需要注意一下
-            type: "POST",//方法类型
-            dataType: "json",//预期服务器返回的数据类型
-            url: "/rent/sort" ,//url
-            data: {filter:$('#search').serializeArray(), curPage:curPage, pageSize:pageSize},
-            success: function (result) {
-                $("#listdiv .dataUl").remove()
-                var info = result.data.info
-                var template = ""
-                for (var val in info) {
-                    let address = ""
-
-                    if (info[val].house_estate) {
-                        address = (info[val].house_estate)["0"]
-                    }
-                    template = template + `<ul class="dataUl">
-                    <div class="data">
-                        <div class="rent-img">
-                            <a href='/rent/detail?house_id=${info[val]._id}'><img src="../../static/imgs/rent/0ad1d1d0-63f1-11e9-89e9-000c29019f85.jpg" alt=""></a>
-                        </div>
-                        <div class="rent-info">
-                            <a href = '/rent/detail?house_id=${info[val]._id}'><h5 class="rent-title">${info[val].title}</h5></a>
-                            <p class="rent-detail">${info[val].house_type}<span>|</span>${info[val].house_type}<span>|</span>${info[val].house_direction}<span>|</span>${info[val].rent_type}</p>
-                            <p class="rent-adress">${address}&nbsp;&nbsp;${info[val].house_address}</p>
-                        </div>
-                        <div class="rent-price">${info[val].price}<strong>元/月</strong></div>
-                    </div>
-                </ul>`
-                }
-                $("#listdiv").prepend(template)
-            },
-            error : function(e) {
-                console.log(e)
-            }
-        });
-    }
-
-    // 分页插件
+{#    $(function() {#}
+{#        $($(".menu li")[4]).addClass("active")#}
+{#    })#}
+{#    // 搜索框的鼠标悬浮事件#}
+{#    $(".item-elems .elem").mouseenter(function() {#}
+{#        $(this).addClass("active")#}
+{#    })#}
+{#    $(".item-elems .elem").mouseout(function() {#}
+{#        $(this).removeClass("active")#}
+{#    })#}
+{##}
+{#    // 搜索框点击事件#}
+{#    $(".item-elems span:not(.all)").click(function() {#}
+{#        if ($(this).hasClass("check")) {#}
+{#            $(this).removeClass("check")#}
+{#            let isAll = true#}
+{#            $(this).siblings(":not(.all)").each(function() {#}
+{#                if ($(this).hasClass("check")) {#}
+{#                    isAll = false#}
+{#                    $(this).siblings(".all").removeClass("check")#}
+{#                }#}
+{#                if (isAll) {#}
+{#                    $(this).siblings(".all").addClass("check")#}
+{#                }#}
+{#            })#}
+{#        } else {#}
+{#            $(this).addClass("check")#}
+{#            $(this).siblings(".all").removeClass("check")#}
+{#        }#}
+{#        searchAction()#}
+{#    })#}
+{#    $(".item-elems .all").click(function() {#}
+{#        $(this).addClass("check")#}
+{#        $(this).siblings().each(function() {#}
+{#            $(this).removeClass("check")#}
+{#        })#}
+{#        searchAction()#}
+{#    })#}
+{#    // 手动表单提交#}
+{#    function formSubmit() {#}
+{#        if (!$(".area .item-elems .all").hasClass("check")) {#}
+{#            let filerList = []#}
+{#            $(".area .item-elems span:not(.all)").each(function() {#}
+{#                if ($(this).hasClass("check")) {#}
+{#                    filerList.push($(this).text())#}
+{#                }#}
+{#            })#}
+{#            if (filerList.length != 0) {#}
+{#                var input = document.createElement("input");#}
+{#                input.name = "area"#}
+{#                input.type = "text"#}
+{#                $(input).css("display", "none")#}
+{#                input.value = JSON.stringify(filerList)#}
+{#                $("#search")[0].appendChild(input)#}
+{#            }#}
+{#        }#}
+{#        if (!$(".price .item-elems .all").hasClass("check")) {#}
+{#            let filerList = []#}
+{#            $(".price .item-elems span:not(.all)").each(function() {#}
+{#                if ($(this).hasClass("check")) {#}
+{#                    filerList.push($(this).text())#}
+{#                }#}
+{#            })#}
+{#            if (filerList.length != 0) {#}
+{#                var input = document.createElement("input");#}
+{#                input.name = "price"#}
+{#                input.type = "text"#}
+{#                $(input).css("display", "none")#}
+{#                input.value = JSON.stringify(filerList)#}
+{#                $("#search")[0].appendChild(input)#}
+{#            }#}
+{#        }#}
+{#        if (!$(".rentype .item-elems .all").hasClass("check")) {#}
+{#            let filerList = []#}
+{#            $(".rentype .item-elems span:not(.all)").each(function() {#}
+{#                if ($(this).hasClass("check")) {#}
+{#                    filerList.push($(this).text())#}
+{#                }#}
+{#            })#}
+{#            if (filerList.length != 0) {#}
+{#                var input = document.createElement("input");#}
+{#                input.name = "rentype"#}
+{#                input.type = "text"#}
+{#                $(input).css("display", "none")#}
+{#                input.value = JSON.stringify(filerList)#}
+{#                $("#search")[0].appendChild(input)#}
+{#            }#}
+{#        }#}
+{#        if (!$(".hometype .item-elems .all").hasClass("check")) {#}
+{#            let filerList = []#}
+{#            $(".hometype .item-elems span:not(.all)").each(function() {#}
+{#                if ($(this).hasClass("check")) {#}
+{#                    filerList.push($(this).text())#}
+{#                }#}
+{#            })#}
+{#            if (filerList.length != 0) {#}
+{#                var input = document.createElement("input");#}
+{#                input.name = "hometype"#}
+{#                input.type = "text"#}
+{#                $(input).css("display", "none")#}
+{#                input.value = JSON.stringify(filerList)#}
+{#                $("#search")[0].appendChild(input)#}
+{#            }#}
+{#        }#}
+{#    }#}
+{##}
+{#    function searchAction() {#}
+{#        formSubmit()#}
+{#        Ajax(1, 10)#}
+{#    }#}
+{##}
+{#    function Ajax(curPage,pageSize) {#}
+{#        $.ajax({#}
+{#            //几个参数需要注意一下#}
+{#            type: "POST",//方法类型#}
+{#            dataType: "json",//预期服务器返回的数据类型#}
+{#            url: "/rent/sort" ,//url#}
+{#            data: {filter:$('#search').serializeArray(), curPage:curPage, pageSize:pageSize},#}
+{#            success: function (result) {#}
+{#                $("#listdiv .dataUl").remove()#}
+{#                var info = result.data.info#}
+{#                var template = ""#}
+{#                for (var val in info) {#}
+{#                    let address = ""#}
+{##}
+{#                    if (info[val].house_estate) {#}
+{#                        address = (info[val].house_estate)["0"]#}
+{#                    }#}
+{#                    template = template + `<ul class="dataUl">#}
+{#                    <div class="data">#}
+{#                        <div class="rent-img">#}
+{#                            <a href='/rent/detail?house_id=${info[val]._id}'><img src="../../static/imgs/rent/0ad1d1d0-63f1-11e9-89e9-000c29019f85.jpg" alt=""></a>#}
+{#                        </div>#}
+{#                        <div class="rent-info">#}
+{#                            <a href = '/rent/detail?house_id=${info[val]._id}'><h5 class="rent-title">${info[val].title}</h5></a>#}
+{#                            <p class="rent-detail">${info[val].house_type}<span>|</span>${info[val].house_type}<span>|</span>${info[val].house_direction}<span>|</span>${info[val].rent_type}</p>#}
+{#                            <p class="rent-adress">${address}&nbsp;&nbsp;${info[val].house_address}</p>#}
+{#                        </div>#}
+{#                        <div class="rent-price">${info[val].price}<strong>元/月</strong></div>#}
+{#                    </div>#}
+{#                </ul>`#}
+{#                }#}
+{#                $("#listdiv").prepend(template)#}
+{#            },#}
+{#            error : function(e) {#}
+{#                console.log(e)#}
+{#            }#}
+{#        });#}
+{#    }#}
+{##}
+{#    // 分页插件#}
     pageUtil.initPage('page',{
 		totalCount:100,//总页数，一般从回调函数中获取。如果没有数据则默认为1页
         curPage:1,//初始化时的默认选中页，默认第一页。如果所填范围溢出或者非数字或者数字字符串，则默认第一页
@@ -461,4 +461,38 @@
         },
     });
 </script>
+    <script type="text/javascript">
+        var local = '';
+        var rent_type = '';
+        var huxing = '';
+        var curPage = 1;
+        var pageSize = 10;
+        $("#local-elems").delegate('span', 'click', function() {
+            $.ajax({
+                type: "post",
+                url: '/rent/sort',
+                // async: false, // 使用同步方式
+                // 1 需要使用JSON.stringify 否则格式为 a=2&b=3&now=14...
+                // 2 需要强制类型转换，否则格式为 {"a":"2","b":"3"}
+                data: JSON.stringify({
+                    "local": local,
+                    "rent_type": rent_type,
+                    "huxing": huxing,
+                    "curpage": curPage,
+                    "pagesize": showCount
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(data) {
+{#                    alert("OK")#}
+                // 渲染页面
+
+                }, // 注意不要在此行增加逗号
+                error: function () {
+                alert("错误")
+                }
+        });
+
+        })
+    </script>
 {% endblock %}
