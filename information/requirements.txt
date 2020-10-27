@@ -5,7 +5,7 @@ blinker==1.4
 certifi==2018.10.15
 cffi==1.11.5
 chardet==3.0.4
-cryptography==2.3.1
+cryptography==3.2
 decorator==4.3.0
 Flask==0.10.1
 Flask-Mail==0.9.1
